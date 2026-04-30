@@ -1,10 +1,5 @@
 import { DataSource } from 'typeorm';
 
-// Deno.env.get() replaces process.env + dotenv
-// Entities must be imported explicitly — glob patterns don't work in Deno
-// Add your entity imports here as you create them:
-// import { Song } from '../entities/song.entity.ts';
-
 export const Database = new DataSource({
   type: 'postgres',
   host: Deno.env.get('DB_HOST'),
