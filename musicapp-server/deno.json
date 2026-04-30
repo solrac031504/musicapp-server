@@ -1,11 +1,10 @@
 {
   "tasks": {
-    "dev": "deno run --watch --allow-net --allow-env --allow-read src/server.ts",
-    "start": "deno run --allow-net --allow-env --allow-read src/server.ts",
+    "dev": "deno run --watch --allow-net --allow-env --env-file --allow-read src/server.ts",
+    "start": "deno run --allow-net --allow-env --env-file --allow-read src/server.ts",
     "type-check": "deno check src/server.ts"
   },
   "compilerOptions": {
-    "target": "ES2020",
     "lib": ["ES2020", "deno.ns", "deno.window"],
     "strict": true,
     "experimentalDecorators": true,
@@ -15,6 +14,7 @@
     "hono": "jsr:@hono/hono@^4.7.11",
     "hono/cors": "jsr:@hono/hono@^4.7.11/cors",
     "typeorm": "npm:typeorm@^0.3.28",
-    "reflect-metadata": "npm:reflect-metadata@^0.2.2"
+    "reflect-metadata": "npm:reflect-metadata@^0.2.2",
+    "pg": "npm:pg@^8.20.0"
   }
 }
