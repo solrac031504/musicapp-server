@@ -1,30 +1,22 @@
 import { 
-    Column, 
-    Entity, 
-    PrimaryGeneratedColumn 
-} from "typeorm";
+Column,
+    Entity,
+    PrimaryColumn
+ } from "typeorm";
 
-@Entity('genre')
-export class Genre {
-    @PrimaryGeneratedColumn({
-        name: 'genre_id',
+@Entity('artist_group_membership')
+export class ArtistGroupMembershipEntity {
+    @PrimaryColumn({
+        name: 'artist_group_id',
         type: 'int'
     })
-    genreId!: number;
+    artistGroupId!: number;
 
-    @Column({
-        name: 'genre_name',
-        type: 'varchar',
-        length: 255
+    @PrimaryColumn({
+        name: 'artist_id',
+        type: 'int'
     })
-    genreName!: string;
-
-    @Column({
-        name: 'description',
-        type: 'varchar',
-        length: 4000
-    })
-    description!: string;
+    artistId!: number;
 
     @Column({ 
         name: 'created_utc', 

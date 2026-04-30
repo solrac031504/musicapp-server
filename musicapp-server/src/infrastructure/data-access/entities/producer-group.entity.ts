@@ -1,22 +1,29 @@
 import { 
 Column,
     Entity,
-    PrimaryColumn
- } from "typeorm";
+    PrimaryGeneratedColumn
+} from "typeorm";
 
-@Entity('artist_group_membership')
-export class ArtistGroupMembership {
-    @PrimaryColumn({
-        name: 'artist_group_id',
+@Entity('producer_group')
+export class ProducerGroupEntity {
+    @PrimaryGeneratedColumn({
+        name: 'producer_group_id',
         type: 'int'
     })
-    artistGroupId!: number;
+    producerGroupId!: number;
 
-    @PrimaryColumn({
-        name: 'artist_id',
-        type: 'int'
+    @Column({
+        name: 'producer_group_name',
+        type: 'varchar',
+        length: 255
     })
-    artistId!: number;
+    producerGroupName!: string;
+
+    @Column({
+        name: 'is_active',
+        type: 'boolean'
+    })
+    isActive!: boolean;
 
     @Column({ 
         name: 'created_utc', 

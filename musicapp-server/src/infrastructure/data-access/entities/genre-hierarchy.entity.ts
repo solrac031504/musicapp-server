@@ -5,7 +5,7 @@ import {
 } from "typeorm";
 
 @Entity('genre_hierarchy')
-export class GenreHierarchy {
+export class GenreHierarchyEntity {
     @PrimaryColumn({
         name: 'genre_id',
         type: 'int'

@@ -5,7 +5,7 @@ import {
 } from "typeorm";
 
 @Entity("artist_group")
-export class ArtistGroup {
+export class ArtistGroupEntity {
     @PrimaryGeneratedColumn({ 
         name: 'artist_group_id', 
         type: 'int' 
