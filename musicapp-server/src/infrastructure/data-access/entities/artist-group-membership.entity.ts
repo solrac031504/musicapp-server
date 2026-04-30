@@ -3,9 +3,10 @@ Column,
     Entity,
     PrimaryColumn
  } from "typeorm";
+ import { BaseEntity } from "../../common/entities/base-entity.ts";
 
 @Entity('artist_group_membership')
-export class ArtistGroupMembershipEntity {
+export class ArtistGroupMembershipEntity extends BaseEntity {
     @PrimaryColumn({
         name: 'artist_group_id',
         type: 'int'

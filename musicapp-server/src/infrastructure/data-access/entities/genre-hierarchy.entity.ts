@@ -3,9 +3,10 @@ import {
     Entity, 
     PrimaryColumn
 } from "typeorm";
+import { BaseEntity } from "../../common/entities/base-entity.ts";
 
 @Entity('genre_hierarchy')
-export class GenreHierarchyEntity {
+export class GenreHierarchyEntity extends BaseEntity {
     @PrimaryColumn({
         name: 'genre_id',
         type: 'int'

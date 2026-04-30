@@ -3,9 +3,10 @@ import {
     Entity, 
     PrimaryGeneratedColumn
 } from "typeorm";
+import { BaseEntity } from "../../common/entities/base-entity.ts";
 
 @Entity('project')
-export class ProjectEntity {
+export class ProjectEntity extends BaseEntity {
     @PrimaryGeneratedColumn({
         name: 'project_id',
         type: 'int'

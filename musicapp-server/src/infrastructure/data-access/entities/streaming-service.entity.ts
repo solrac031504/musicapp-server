@@ -3,9 +3,10 @@ import {
     Entity, 
     PrimaryGeneratedColumn 
 } from "typeorm";
+import { BaseEntity } from "../../common/entities/base-entity.ts";
 
 @Entity('streaming_service')
-export class StreamingServiceEntity {
+export class StreamingServiceEntity extends BaseEntity {
     @PrimaryGeneratedColumn({
         name: 'streaming_service_id',
         type: 'int'

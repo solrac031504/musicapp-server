@@ -1,7 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity } from "../../common/entities/base-entity.ts";
 
 @Entity('user_login')
-export class UserLoginEntity {
+export class UserLoginEntity extends BaseEntity {
     @PrimaryGeneratedColumn({
         name: 'user_login_id',
         type: 'int'
