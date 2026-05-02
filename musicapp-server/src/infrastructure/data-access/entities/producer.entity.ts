@@ -3,7 +3,7 @@ Column,
     Entity,
     PrimaryGeneratedColumn
 } from "typeorm";
-import { BaseEntity } from "../../common/entities/base-entity.ts";
+import { BaseEntity } from "../../common/data-access/entities/base-entity.ts";
 
 @Entity('producer')
 export class Producer extends BaseEntity {

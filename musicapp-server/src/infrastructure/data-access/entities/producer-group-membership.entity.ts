@@ -3,7 +3,7 @@ Column,
     Entity, 
     PrimaryColumn
 } from "typeorm";
-import { BaseEntity } from "../../common/entities/base-entity.ts";
+import { BaseEntity } from "../../common/data-access/entities/base-entity.ts";
 
 @Entity('producer_group_membership')
 export class ProducerGroupMembershipEntity extends BaseEntity {
