@@ -6,7 +6,7 @@ Column,
 import { BaseEntity } from "../../common/data-access/entities/base-entity.ts";
 
 @Entity('producer')
-export class Producer extends BaseEntity {
+export class ProducerEntity extends BaseEntity {
     @PrimaryGeneratedColumn({
         name: 'producer_id',
         type: 'int'
@@ -32,7 +32,7 @@ export class Producer extends BaseEntity {
         insert: false,
         utc: true
     })
-    createdUtc!: Date;
+    createdUtc: Date = null!;
 
     @Column({ 
         name: 'created_by', 
@@ -40,7 +40,7 @@ export class Producer extends BaseEntity {
         length: 255, 
         insert: false 
     })
-    createdBy!: string;
+    createdBy: string = null!;
 
     @Column({ 
         name: 'modified_utc', 
@@ -49,7 +49,7 @@ export class Producer extends BaseEntity {
         insert: false,
         utc: true
     })
-    modifiedUtc!: Date | null;
+    modifiedUtc: Date | null = null;
 
     @Column({ 
         name: 'modified_by', 
@@ -58,5 +58,5 @@ export class Producer extends BaseEntity {
         nullable: true, 
         insert: false 
     })
-    modifiedBy!: string | null;
+    modifiedBy: string | null = null;
 }
