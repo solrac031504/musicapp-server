@@ -33,11 +33,11 @@ export class SongEntity extends BaseEntity {
     projectId!: number;
 
     @Column({
-        name: 'project_group_id',
+        name: 'producer_group_id',
         type: 'int',
         nullable: true
     })
-    projectGroupId!: number | null;
+    producerGroupId!: number | null;
 
     @Column({
         name: 'genre_id',
@@ -91,7 +91,7 @@ export class SongEntity extends BaseEntity {
         insert: false,
         utc: true
     })
-    createdUtc!: Date;
+    createdUtc: Date = null!;
 
     @Column({ 
         name: 'created_by', 
@@ -99,7 +99,7 @@ export class SongEntity extends BaseEntity {
         length: 255, 
         insert: false 
     })
-    createdBy!: string;
+    createdBy: string= null!;
 
     @Column({ 
         name: 'modified_utc', 
@@ -108,7 +108,7 @@ export class SongEntity extends BaseEntity {
         insert: false,
         utc: true
     })
-    modifiedUtc!: Date | null;
+    modifiedUtc: Date | null = null;
 
     @Column({ 
         name: 'modified_by', 
@@ -117,5 +117,5 @@ export class SongEntity extends BaseEntity {
         nullable: true, 
         insert: false 
     })
-    modifiedBy!: string | null;
+    modifiedBy: string | null = null;
 }
