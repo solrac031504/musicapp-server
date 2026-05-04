@@ -60,7 +60,7 @@ export class ProjectEntity extends BaseEntity {
         insert: false,
         utc: true
     })
-    createdUtc!: Date;
+    createdUtc: Date = null!;
 
     @Column({ 
         name: 'created_by', 
@@ -68,7 +68,7 @@ export class ProjectEntity extends BaseEntity {
         length: 255, 
         insert: false 
     })
-    createdBy!: string;
+    createdBy: string = null!;
 
     @Column({ 
         name: 'modified_utc', 
@@ -77,7 +77,7 @@ export class ProjectEntity extends BaseEntity {
         insert: false,
         utc: true
     })
-    modifiedUtc!: Date | null;
+    modifiedUtc: Date | null = null;
 
     @Column({ 
         name: 'modified_by', 
@@ -86,5 +86,5 @@ export class ProjectEntity extends BaseEntity {
         nullable: true, 
         insert: false 
     })
-    modifiedBy!: string | null;
+    modifiedBy: string | null = null;
 }
