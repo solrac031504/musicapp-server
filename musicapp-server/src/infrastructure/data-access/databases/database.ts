@@ -14,7 +14,7 @@ import { SongEntity } from "../entities/song.entity.ts";
 import { StreamingServiceEntity } from "../entities/streaming-service.entity.ts";
 import { UserLoginEntity } from "../entities/user-login.entity.ts";
 
-export const Database = new DataSource({
+export const dataSource = new DataSource({
   type: 'postgres',
   host: Deno.env.get('DB_HOST'),
   port: parseInt(Deno.env.get('DB_PORT')!),

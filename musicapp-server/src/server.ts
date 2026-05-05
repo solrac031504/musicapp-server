@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
-import { Database } from './infrastructure/data-access/databases/database.ts';
+import { dataSource } from './infrastructure/data-access/databases/database.ts';
 
 const app = new Hono();
 
@@ -15,7 +15,7 @@ app.get('/', (c) => c.json({ status: 'ok', message: 'musicapp-server running' })
 // --- Database + Server bootstrap ---
 const PORT = parseInt(Deno.env.get('PORT') ?? '3000');
 
-Database.initialize()
+dataSource.initialize()
   .then(() => {
     console.log('Database connected');
     Deno.serve({ port: PORT }, app.fetch);
