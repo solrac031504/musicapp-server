@@ -5,8 +5,12 @@ import { ArtistEntity } from "../entities/artist.entity.ts";
 import { ArtistEntityMapper } from "../../logic/mappers/artist.entity-mapper.ts";
 
 export class ArtistRepository extends Repository<ArtistModel, ArtistEntity, DataSource> {
+    protected mapper: ArtistEntityMapper;
+    
     constructor(dataSource: DataSource) {
         super(dataSource, ArtistEntity);
+        
+        this.mapper = new ArtistEntityMapper;
     }
 
     public override async findOneById(id: number): Promise<ArtistEntity | null> {
@@ -14,10 +18,10 @@ export class ArtistRepository extends Repository<ArtistModel, ArtistEntity, Data
     }
 
     public override toModel(entity: ArtistEntity): ArtistModel {
-        return ArtistEntityMapper.toModel(entity);
+        return this.mapper.toModel(entity);
     }
 
     public override fromModel(model: ArtistModel): ArtistEntity {
-        return ArtistEntityMapper.fromModel(model);
+        return this.mapper.fromModel(model);
     }
 }
