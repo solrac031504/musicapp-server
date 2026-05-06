@@ -12,6 +12,4 @@ export abstract class BaseRepository<T extends BaseModel> {
     public abstract list(): Promise<T[]>;
 
     public abstract getById(id: number): Promise<T | null>;
-
-    public abstract save(): Promise<void>;
 }
