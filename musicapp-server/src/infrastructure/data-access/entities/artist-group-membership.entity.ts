@@ -8,12 +8,18 @@ import { BaseEntity } from "../../common/data-access/entities/base-entity.ts";
 @Entity('artist_group_membership')
 export class ArtistGroupMembershipEntity extends BaseEntity {
     @PrimaryColumn({
+        name: 'artist_group_membership_id',
+        type: 'int'
+    })
+    artistGroupMembershipId!: number;
+
+    @Column({
         name: 'artist_group_id',
         type: 'int'
     })
     artistGroupId!: number;
 
-    @PrimaryColumn({
+    @Column({
         name: 'artist_id',
         type: 'int'
     })

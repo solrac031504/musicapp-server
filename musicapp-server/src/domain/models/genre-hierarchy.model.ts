@@ -1,3 +1,7 @@
-import { BaseMembershipModel } from "../common/models/base-membership.model.ts";
+import { BaseIdModel } from "../common/models/base-id.model.ts";
 
-export class GenreHierarchyModel extends BaseMembershipModel { }
+export class GenreHierarchyModel extends BaseIdModel { 
+    genreId!: number;
+
+    parentGenreId!: number;
+}

@@ -1,3 +1,7 @@
-import { BaseMembershipModel } from "../common/models/base-membership.model.ts";
+import { BaseIdModel } from "../common/models/base-id.model.ts";
 
-export class ProducerGroupMembershipModel extends BaseMembershipModel { }
+export class ProducerGroupMembershipModel extends BaseIdModel { 
+    producerGroupId!: number;
+
+    producerId!: number;
+}

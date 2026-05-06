@@ -5,15 +5,17 @@ import { ArtistGroupMembershipEntity } from "../../data-access/entities/artist-g
 export class ArtistGroupMembershipEntityMapper extends EntityMapper<ArtistGroupMembershipModel, ArtistGroupMembershipEntity> {
     public override toModel(entity: ArtistGroupMembershipEntity): ArtistGroupMembershipModel {
         return {
-            groupId: entity.artistGroupId,
-            memberId: entity.artistId
+            id: entity.artistGroupMembershipId,
+            artistGroupId: entity.artistGroupId,
+            artistId: entity.artistId
         } as ArtistGroupMembershipModel;
     }
 
     public override fromModel(model: ArtistGroupMembershipModel): ArtistGroupMembershipEntity {
         return {
-            artistGroupId: model.groupId,
-            artistId: model.memberId
+            artistGroupMembershipId: model.id,
+            artistGroupId: model.artistGroupId,
+            artistId: model.artistId
         } as ArtistGroupMembershipEntity;
     }
 }

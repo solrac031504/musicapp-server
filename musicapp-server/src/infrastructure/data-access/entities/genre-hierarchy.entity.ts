@@ -8,12 +8,18 @@ import { BaseEntity } from "../../common/data-access/entities/base-entity.ts";
 @Entity('genre_hierarchy')
 export class GenreHierarchyEntity extends BaseEntity {
     @PrimaryColumn({
+        name: 'genre_hierarchy_id',
+        type: 'int'
+    })
+    genreHierarchyId!: number;
+
+    @Column({
         name: 'genre_id',
         type: 'int'
     })
     genreId!: number;
 
-    @PrimaryColumn({
+    @Column({
         name: 'parent_genre_id',
         type: 'int'
     })

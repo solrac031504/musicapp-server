@@ -5,15 +5,17 @@ import { GenreHierarchyEntity } from "../../data-access/entities/genre-hierarchy
 export class GenreHierarchyEntityMapper extends EntityMapper<GenreHierarchyModel, GenreHierarchyEntity> {
     public override toModel(entity: GenreHierarchyEntity): GenreHierarchyModel {
         return {
-            groupId: entity.parentGenreId,
-            memberId: entity.genreId
+            id: entity.genreHierarchyId,
+            genreId: entity.genreId,
+            parentGenreId: entity.parentGenreId
         } as GenreHierarchyModel
     }
 
     public override fromModel(model: GenreHierarchyModel): GenreHierarchyEntity {
         return {
-            parentGenreId: model.groupId,
-            genreId: model.memberId
+            genreHierarchyId: model.id,
+            genreId: model.genreId,
+            parentGenreId: model.parentGenreId
         } as GenreHierarchyEntity
     }
 }

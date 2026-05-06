@@ -8,12 +8,18 @@ import { BaseEntity } from "../../common/data-access/entities/base-entity.ts";
 @Entity('producer_group_membership')
 export class ProducerGroupMembershipEntity extends BaseEntity {
     @PrimaryColumn({
+        name: 'producer_group_membership_id',
+        type: 'int'
+    })
+    producerGroupMembershipId!: number;
+
+    @Column({
         name: 'producer_group_id',
         type: 'int'
     })
     producerGroupId!: number;
 
-    @PrimaryColumn({
+    @Column({
         name: 'producer_id',
         type: 'int'
     })

@@ -5,15 +5,17 @@ import { ProducerGroupMembershipEntity } from "../../data-access/entities/produc
 export class ProducerGroupMembershipEntityMapper extends EntityMapper<ProducerGroupMembershipModel, ProducerGroupMembershipEntity> {
     public override toModel(entity: ProducerGroupMembershipEntity): ProducerGroupMembershipModel {
         return {
-            groupId: entity.producerGroupId,
-            memberId: entity.producerId
+            id: entity.producerGroupMembershipId,
+            producerGroupId: entity.producerGroupId,
+            producerId: entity.producerId
         } as ProducerGroupMembershipModel
     }
 
     public override fromModel(model: ProducerGroupMembershipModel): ProducerGroupMembershipEntity {
         return {
-            producerGroupId: model.groupId,
-            producerId: model.memberId
+            producerGroupMembershipId: model.id,
+            producerGroupId: model.producerGroupId,
+            producerId: model.producerId
         } as ProducerGroupMembershipEntity
     }
 }
