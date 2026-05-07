@@ -1,13 +1,13 @@
 import { 
 Column,
     Entity, 
-    PrimaryColumn
+    PrimaryGeneratedColumn
 } from "typeorm";
 import { BaseEntity } from "../../common/data-access/entities/base-entity.ts";
 
 @Entity('producer_group_membership')
 export class ProducerGroupMembershipEntity extends BaseEntity {
-    @PrimaryColumn({
+    @PrimaryGeneratedColumn({
         name: 'producer_group_membership_id',
         type: 'int'
     })
