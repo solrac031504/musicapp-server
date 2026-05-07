@@ -6,15 +6,18 @@ import {
 import { BaseModel } from "../../../../domain/common/models/base.model.ts";
 import { BaseEntity } from "../entities/base-entity.ts";
 import { BaseRepository } from "../../../../domain/common/repositories/base-repository.ts";
+import { EntityMapper } from "../../mappers/entity-mapper.ts";
 
 // TODO: Maybe cleanup use of save()? insert() and update() exist, but don't return the result on operation...
 
-export abstract class Repository<T extends BaseModel, K extends BaseEntity, Y extends DataSource> extends BaseRepository<T> {
+export abstract class Repository<T extends BaseModel, K extends BaseEntity, M extends EntityMapper<T, K>, Y extends DataSource> extends BaseRepository<T> {
     protected readonly repo: TypeOrmRepository<K>;
+    protected readonly mapper: M;
 
-    constructor(dataSource: Y, entity: EntityTarget<K>) {
+    constructor(dataSource: Y, entity: EntityTarget<K>, mapper: M) {
         super();
         this.repo = dataSource.getRepository<K>(entity);
+        this.mapper = mapper;
     }
 
     public override async add(model: T): Promise<T> {
@@ -63,9 +66,13 @@ export abstract class Repository<T extends BaseModel, K extends BaseEntity, Y ex
         return this.toModel(entity);
     }
 
-    public abstract findOneById(id: number): Promise<K | null>;
+    protected toModel(entity: K): T {
+        return this.mapper.toModel(entity);
+    }
 
-    public abstract toModel(entity: K): T;
+    protected fromModel(model: T): K {
+        return this.mapper.fromModel(model);
+    }
 
-    public abstract fromModel(model: T): K;
+    protected abstract findOneById(id: number): Promise<K | null>;
 }
