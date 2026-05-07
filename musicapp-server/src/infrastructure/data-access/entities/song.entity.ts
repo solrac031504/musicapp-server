@@ -3,10 +3,10 @@ import {
     Entity, 
     PrimaryGeneratedColumn
 } from "typeorm";
-import { BaseEntity } from "../../common/data-access/entities/base-entity.ts";
+import { BaseTableEntity } from "../../common/data-access/entities/base-table-entity.ts";
 
 @Entity('song')
-export class SongEntity extends BaseEntity {
+export class SongEntity extends BaseTableEntity {
     @PrimaryGeneratedColumn({
         name: 'song_id',
         type: 'int'
@@ -84,38 +84,4 @@ export class SongEntity extends BaseEntity {
         type: 'boolean'
     })
     isLocalFile!: boolean;
-
-    @Column({ 
-        name: 'created_utc', 
-        type: 'timestamptz', 
-        insert: false,
-        utc: true
-    })
-    createdUtc: Date = null!;
-
-    @Column({ 
-        name: 'created_by', 
-        type: 'varchar', 
-        length: 255, 
-        insert: false 
-    })
-    createdBy: string= null!;
-
-    @Column({ 
-        name: 'modified_utc', 
-        type: 'timestamptz', 
-        nullable: true, 
-        insert: false,
-        utc: true
-    })
-    modifiedUtc: Date | null = null;
-
-    @Column({ 
-        name: 'modified_by', 
-        type: 'varchar', 
-        length: 255, 
-        nullable: true, 
-        insert: false 
-    })
-    modifiedBy: string | null = null;
 }

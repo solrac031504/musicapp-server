@@ -3,10 +3,10 @@ import {
     Entity, 
     PrimaryGeneratedColumn 
 } from "typeorm";
-import { BaseEntity } from "../../common/data-access/entities/base-entity.ts";
+import { BaseTableEntity } from "../../common/data-access/entities/base-table-entity.ts";
 
 @Entity('streaming_service')
-export class StreamingServiceEntity extends BaseEntity {
+export class StreamingServiceEntity extends BaseTableEntity {
     @PrimaryGeneratedColumn({
         name: 'streaming_service_id',
         type: 'int'
@@ -19,38 +19,4 @@ export class StreamingServiceEntity extends BaseEntity {
         length: 255
     })
     streamingServiceName!: string;
-
-    @Column({ 
-        name: 'created_utc', 
-        type: 'timestamptz', 
-        insert: false,
-        utc: true
-    })
-    createdUtc: Date = null!;
-
-    @Column({ 
-        name: 'created_by', 
-        type: 'varchar', 
-        length: 255, 
-        insert: false 
-    })
-    createdBy: string = null!;
-
-    @Column({ 
-        name: 'modified_utc', 
-        type: 'timestamptz', 
-        nullable: true, 
-        insert: false,
-        utc: true
-    })
-    modifiedUtc: Date | null = null;
-
-    @Column({ 
-        name: 'modified_by', 
-        type: 'varchar', 
-        length: 255, 
-        nullable: true, 
-        insert: false 
-    })
-    modifiedBy: string | null = null;
 }
