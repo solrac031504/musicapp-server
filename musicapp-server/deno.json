@@ -16,5 +16,8 @@
     "typeorm": "npm:typeorm@^0.3.28",
     "reflect-metadata": "npm:reflect-metadata@^0.2.2",
     "pg": "npm:pg@^8.20.0"
+  },
+  "fmt": {
+    "indentWidth": 4
   }
 }

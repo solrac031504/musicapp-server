@@ -16,8 +16,8 @@ export class SongEntityMapper extends EntityMapper<SongModel, SongEntity> {
             duration: entity.duration,
             rating: entity.rating,
             isAdded: entity.isAdded,
-            isLocalFile: entity.isLocalFile
-        } as SongModel
+            isLocalFile: entity.isLocalFile,
+        } as SongModel;
     }
 
     public override fromModel(model: SongModel): SongEntity {
@@ -33,7 +33,7 @@ export class SongEntityMapper extends EntityMapper<SongModel, SongEntity> {
             duration: model.duration,
             rating: model.rating,
             isAdded: model.isAdded,
-            isLocalFile: model.isLocalFile
-        } as SongEntity
+            isLocalFile: model.isLocalFile,
+        } as SongEntity;
     }
 }

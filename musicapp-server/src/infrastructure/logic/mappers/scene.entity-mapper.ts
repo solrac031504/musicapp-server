@@ -8,8 +8,8 @@ export class SceneEntityMapper extends EntityMapper<SceneModel, SceneEntity> {
             id: entity.sceneId,
             sceneName: entity.sceneName,
             description: entity.description,
-            isGeographic: entity.isGeographic
-        } as SceneModel
+            isGeographic: entity.isGeographic,
+        } as SceneModel;
     }
 
     public override fromModel(model: SceneModel): SceneEntity {
@@ -17,7 +17,7 @@ export class SceneEntityMapper extends EntityMapper<SceneModel, SceneEntity> {
             sceneId: model.id,
             sceneName: model.sceneName,
             description: model.description,
-            isGeographic: model.isGeographic
-        } as SceneEntity
+            isGeographic: model.isGeographic,
+        } as SceneEntity;
     }
 }

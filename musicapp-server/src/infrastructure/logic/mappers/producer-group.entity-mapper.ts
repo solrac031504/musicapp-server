@@ -2,20 +2,21 @@ import { ProducerGroupModel } from "../../../domain/models/producer-group.model.
 import { EntityMapper } from "../../common/mappers/entity-mapper.ts";
 import { ProducerGroupEntity } from "../../data-access/entities/producer-group.entity.ts";
 
-export class ProducerGroupEntityMapper extends EntityMapper<ProducerGroupModel, ProducerGroupEntity> {
+export class ProducerGroupEntityMapper
+    extends EntityMapper<ProducerGroupModel, ProducerGroupEntity> {
     public override toModel(entity: ProducerGroupEntity): ProducerGroupModel {
         return {
             id: entity.producerGroupId,
             producerGroupName: entity.producerGroupName,
-            isActive: entity.isActive
-        } as ProducerGroupModel
+            isActive: entity.isActive,
+        } as ProducerGroupModel;
     }
 
     public override fromModel(model: ProducerGroupModel): ProducerGroupEntity {
         return {
             producerGroupId: model.id,
             producerGroupName: model.producerGroupName,
-            isActive: model.isActive
-        } as ProducerGroupEntity
+            isActive: model.isActive,
+        } as ProducerGroupEntity;
     }
 }

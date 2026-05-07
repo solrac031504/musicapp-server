@@ -7,15 +7,15 @@ export class GenreEntityMapper extends EntityMapper<GenreModel, GenreEntity> {
         return {
             id: entity.genreId,
             genreName: entity.genreName,
-            description: entity.description
-        } as GenreModel
+            description: entity.description,
+        } as GenreModel;
     }
 
     public override fromModel(model: GenreModel): GenreEntity {
         return {
             genreId: model.id,
             genreName: model.genreName,
-            description: model.description
-        } as GenreEntity
+            description: model.description,
+        } as GenreEntity;
     }
 }

@@ -4,12 +4,24 @@ import { Repository } from "../../common/data-access/repositories/repository.ts"
 import { GenreHierarchyEntityMapper } from "../../logic/mappers/genre-hierarchy.entity-mapper.ts";
 import { GenreHierarchyEntity } from "../entities/genre-hierarchy.entity.ts";
 
-export class GenreHierarchyRepository extends Repository<GenreHierarchyModel, GenreHierarchyEntity, GenreHierarchyEntityMapper, DataSource> {
+export class GenreHierarchyRepository
+    extends Repository<
+        GenreHierarchyModel,
+        GenreHierarchyEntity,
+        GenreHierarchyEntityMapper,
+        DataSource
+    > {
     constructor(dataSource: DataSource) {
-        super(dataSource, GenreHierarchyEntity, new GenreHierarchyEntityMapper);
+        super(
+            dataSource,
+            GenreHierarchyEntity,
+            new GenreHierarchyEntityMapper(),
+        );
     }
 
-    protected override async findOneById(id: number): Promise<GenreHierarchyEntity | null> {
+    protected override async findOneById(
+        id: number,
+    ): Promise<GenreHierarchyEntity | null> {
         return await this.repo.findOneBy({ genreHierarchyId: id });
     }
 }

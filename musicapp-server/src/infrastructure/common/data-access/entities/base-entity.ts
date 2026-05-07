@@ -1,3 +1,3 @@
-import { ObjectLiteral } from 'typeorm';
+import { ObjectLiteral } from "typeorm";
 
-export class BaseEntity implements ObjectLiteral { }
+export class BaseEntity implements ObjectLiteral {}

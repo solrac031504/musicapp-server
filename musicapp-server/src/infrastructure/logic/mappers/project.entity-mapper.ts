@@ -2,7 +2,8 @@ import { ProjectModel } from "../../../domain/models/project.model.ts";
 import { EntityMapper } from "../../common/mappers/entity-mapper.ts";
 import { ProjectEntity } from "../../data-access/entities/project.entity.ts";
 
-export class ProjectEntityMapper extends EntityMapper<ProjectModel, ProjectEntity> {
+export class ProjectEntityMapper
+    extends EntityMapper<ProjectModel, ProjectEntity> {
     public override toModel(entity: ProjectEntity): ProjectModel {
         return {
             id: entity.projectId,
@@ -11,8 +12,8 @@ export class ProjectEntityMapper extends EntityMapper<ProjectModel, ProjectEntit
             sceneId: entity.sceneId,
             projectTypeId: entity.projectTypeId,
             releaseDate: entity.releaseDate,
-            rating: entity.rating
-        } as ProjectModel
+            rating: entity.rating,
+        } as ProjectModel;
     }
 
     public override fromModel(model: ProjectModel): ProjectEntity {
@@ -23,7 +24,7 @@ export class ProjectEntityMapper extends EntityMapper<ProjectModel, ProjectEntit
             sceneId: model.sceneId,
             projectTypeId: model.projectTypeId,
             releaseDate: model.releaseDate,
-            rating: model.rating
-        } as ProjectEntity
+            rating: model.rating,
+        } as ProjectEntity;
     }
 }

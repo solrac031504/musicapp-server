@@ -1,1 +1,1 @@
-export class BaseParameter { }
+export class BaseParameter {}

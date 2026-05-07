@@ -2,7 +2,8 @@ import { UserLoginModel } from "../../../domain/models/user-login.model.ts";
 import { EntityMapper } from "../../common/mappers/entity-mapper.ts";
 import { UserLoginEntity } from "../../data-access/entities/user-login.entity.ts";
 
-export class UserLoginEntityMapper extends EntityMapper<UserLoginModel, UserLoginEntity> {
+export class UserLoginEntityMapper
+    extends EntityMapper<UserLoginModel, UserLoginEntity> {
     public override toModel(entity: UserLoginEntity): UserLoginModel {
         return {
             id: entity.userLoginId,
@@ -11,8 +12,8 @@ export class UserLoginEntityMapper extends EntityMapper<UserLoginModel, UserLogi
             loginCount: entity.loginCount,
             lastLoginDate: entity.lastLoginDate,
             isActive: entity.isActive,
-            isAdmin: entity.isAdmin
-        } as UserLoginModel
+            isAdmin: entity.isAdmin,
+        } as UserLoginModel;
     }
 
     public override fromModel(model: UserLoginModel): UserLoginEntity {
@@ -23,7 +24,7 @@ export class UserLoginEntityMapper extends EntityMapper<UserLoginModel, UserLogi
             loginCount: model.loginCount,
             lastLoginDate: model.lastLoginDate,
             isActive: model.isActive,
-            isAdmin: model.isAdmin
-        } as UserLoginEntity
+            isAdmin: model.isAdmin,
+        } as UserLoginEntity;
     }
 }
