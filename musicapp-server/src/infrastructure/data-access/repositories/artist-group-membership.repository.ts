@@ -3,11 +3,10 @@ import { ArtistGroupMembershipModel } from "../../../domain/models/artist-group-
 import { Repository } from "../../common/data-access/repositories/repository.ts";
 import { ArtistGroupMembershipEntityMapper } from "../../logic/mappers/artist-group-membership.entity-mapper.ts";
 import { ArtistGroupMembershipEntity } from "../entities/artist-group-membership.entity.ts";
-import { ArtistEntity } from "../entities/artist.entity.ts";
 
 export class ArtistGroupMembershipRepository extends Repository<ArtistGroupMembershipModel, ArtistGroupMembershipEntity, ArtistGroupMembershipEntityMapper, DataSource> {
     constructor(dataSource: DataSource) {
-        super(dataSource, ArtistEntity, new ArtistGroupMembershipEntityMapper);
+        super(dataSource, ArtistGroupMembershipEntity, new ArtistGroupMembershipEntityMapper);
     }
 
     protected override async findOneById(id: number): Promise<ArtistGroupMembershipEntity | null> {
