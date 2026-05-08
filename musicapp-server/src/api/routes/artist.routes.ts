@@ -11,7 +11,7 @@ export function artistRoutes(controller: ArtistController): Hono {
 
         const res = await controller.getArtist(req);
 
-        return c.json(res);
+        return c.json(res, res.statusCode as 200 | 404);
     });
 
     router.post("/add", async (c) => {

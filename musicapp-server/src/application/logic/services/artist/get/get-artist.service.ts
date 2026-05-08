@@ -19,7 +19,7 @@ export class GetArtistService
     ): Promise<GetArtistResponse> {
         const artistModel = await this.repo.getById(req.id);
 
-        if (!artistModel) new GetArtistResponse();
+        if (!artistModel) return new GetArtistResponse().notFound();
 
         return this.resMapper.map(artistModel!);
     }
