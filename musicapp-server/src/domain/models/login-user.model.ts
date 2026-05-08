@@ -1,11 +1,11 @@
 import { BaseModel } from "../common/models/base.model.ts";
 
 export class LoginUserModel extends BaseModel {
-    poauthenticated!: boolean;
+    isAuthenticated!: boolean;
 
-    poauthexpiration!: Date | null;
+    authExpiration!: Date | null;
 
-    poisadmin!: boolean;
+    isAdmin!: boolean;
 
-    poerrormessage!: string | null;
+    errorMessage!: string | null;
 }

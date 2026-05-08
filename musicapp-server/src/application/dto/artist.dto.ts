@@ -1,6 +1,6 @@
-import { BaseDTO } from "../common/dto/base-dto.ts";
+import { BaseIdDTO } from "../common/dto/base-id-dto.ts";
 
-export class ArtistDTO extends BaseDTO {
+export class ArtistDTO extends BaseIdDTO {
     artistName!: string;
 
     isActive!: boolean;

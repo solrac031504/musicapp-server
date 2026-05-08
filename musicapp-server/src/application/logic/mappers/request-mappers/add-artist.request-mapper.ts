@@ -6,6 +6,7 @@ export class AddArtistRequestMapper
     extends BaseRequestMapper<AddArtistRequest, ArtistModel> {
     public override map(req: AddArtistRequest): ArtistModel {
         return {
+            id: req.item.id,
             artistName: req.item.artistName,
             isActive: req.item.isActive,
         } as ArtistModel;
