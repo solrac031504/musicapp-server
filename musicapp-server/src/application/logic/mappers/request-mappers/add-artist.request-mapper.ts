@@ -1,6 +1,6 @@
 import { ArtistModel } from "../../../../domain/models/artist.model.ts";
 import { BaseRequestMapper } from "../../../common/mappers/base-request-mapper.ts";
-import { AddArtistRequest } from "../../services/artist/add-artist.request.ts";
+import { AddArtistRequest } from "../../services/artist/add/add-artist.request.ts";
 
 export class AddArtistRequestMapper
     extends BaseRequestMapper<AddArtistRequest, ArtistModel> {

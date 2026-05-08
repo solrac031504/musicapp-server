@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { AddArtistRequest } from "../../application/logic/services/artist/add-artist.request.ts";
+import { AddArtistRequest } from "../../application/logic/services/artist/add/add-artist.request.ts";
 import { ArtistController } from "../controllers/artist.controller.ts";
 
 export function artistRoutes(controller: ArtistController): Hono {

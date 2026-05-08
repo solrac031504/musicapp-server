@@ -1,6 +1,6 @@
-import { AddArtistRequest } from "../../application/logic/services/artist/add-artist.request.ts";
-import { AddArtistResponse } from "../../application/logic/services/artist/add-artist.response.ts";
-import { AddArtistService } from "../../application/logic/services/artist/add-artist.service.ts";
+import { AddArtistRequest } from "../../application/logic/services/artist/add/add-artist.request.ts";
+import { AddArtistResponse } from "../../application/logic/services/artist/add/add-artist.response.ts";
+import { AddArtistService } from "../../application/logic/services/artist/add/add-artist.service.ts";
 
 export class ArtistController {
     private readonly addArtistService;

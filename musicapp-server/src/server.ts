@@ -3,7 +3,7 @@ import { cors } from "hono/cors";
 import "reflect-metadata";
 import { ArtistController } from "./api/controllers/artist.controller.ts";
 import { artistRoutes } from "./api/routes/artist.routes.ts";
-import { AddArtistService } from "./application/logic/services/artist/add-artist.service.ts";
+import { AddArtistService } from "./application/logic/services/artist/add/add-artist.service.ts";
 import { dataSource } from "./infrastructure/data-access/databases/database.ts";
 import { ArtistRepository } from "./infrastructure/data-access/repositories/artist.repository.ts";
 
