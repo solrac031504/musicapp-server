@@ -4,6 +4,7 @@ import "reflect-metadata";
 import { ArtistController } from "./api/controllers/artist.controller.ts";
 import { artistRoutes } from "./api/routes/artist.routes.ts";
 import { AddArtistService } from "./application/logic/services/artist/add/add-artist.service.ts";
+import { GetArtistService } from "./application/logic/services/artist/get/get-artist.service.ts";
 import { dataSource } from "./infrastructure/data-access/databases/database.ts";
 import { ArtistRepository } from "./infrastructure/data-access/repositories/artist.repository.ts";
 
@@ -28,9 +29,13 @@ dataSource.initialize()
 
         // Add services
         const addArtistService = new AddArtistService(artistRepository);
+        const getArtistService = new GetArtistService(artistRepository);
 
         // Add controllers
-        const artistController = new ArtistController(addArtistService);
+        const artistController = new ArtistController(
+            addArtistService,
+            getArtistService,
+        );
 
         // Routing
         app.route("/artist", artistRoutes(artistController));
