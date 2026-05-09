@@ -18,6 +18,8 @@
     "pg": "npm:pg@^8.20.0"
   },
   "fmt": {
-    "indentWidth": 4
+    "indentWidth": 4,
+    "useTabs": true,
+    "lineWidth": 160
   }
 }

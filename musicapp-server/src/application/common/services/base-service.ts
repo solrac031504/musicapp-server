@@ -5,5 +5,5 @@ export abstract class BaseService<
     TRequest extends BaseRequest,
     TResponse extends BaseResponse,
 > {
-    abstract execute(req: TRequest): Promise<TResponse>;
+    public abstract execute(req: TRequest): Promise<TResponse>;
 }
