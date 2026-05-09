@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import { logger } from "hono/logger";
 import "reflect-metadata";
 import { ArtistController } from "./api/controllers/artist.controller.ts";
 import { artistRoutes } from "./api/routes/artist.routes.ts";
@@ -12,6 +13,9 @@ import { dataSource } from "./infrastructure/data-access/databases/database.ts";
 import { ArtistRepository } from "./infrastructure/data-access/repositories/artist.repository.ts";
 
 const app = new Hono();
+
+// Setup logger of development
+app.use(logger());
 
 // CORS config for now
 app.use("*", cors());

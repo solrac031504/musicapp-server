@@ -27,15 +27,6 @@ export function artistRoutes(controller: ArtistController): Hono {
 		return c.json(res);
 	});
 
-	// GET artist
-	router.get("/:id", async (c) => {
-		const req = { id: parseInt(c.req.param("id")) } as GetArtistRequest;
-
-		const res = await controller.getArtist(req);
-
-		return c.json(res, res.statusCode as 200 | 404);
-	});
-
 	// LIST artists
 	router.get("/list", async (c) => {
 		const res = await controller.listArtist(new ListArtistsRequest());
@@ -50,6 +41,16 @@ export function artistRoutes(controller: ArtistController): Hono {
 		const res = await controller.updateArtist(body);
 
 		return c.json(res);
+	});
+
+	// Dynamic routes must go after specific routes
+	// GET artist
+	router.get("/:id", async (c) => {
+		const req = { id: parseInt(c.req.param("id")) } as GetArtistRequest;
+
+		const res = await controller.getArtist(req);
+
+		return c.json(res, res.statusCode as 200 | 404);
 	});
 
 	return router;
