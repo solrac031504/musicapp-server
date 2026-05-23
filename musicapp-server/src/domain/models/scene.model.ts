@@ -1,9 +1,13 @@
 import { BaseIdModel } from "../common/models/base-id.model.ts";
 
 export class SceneModel extends BaseIdModel {
-    sceneName!: string;
+	sceneName!: string;
 
-    description!: string;
+	description!: string;
 
-    isGeographic!: boolean;
+	isGeographic!: boolean;
+
+	createdBy: string = null!;
+
+	modifiedBy: string | null = null;
 }

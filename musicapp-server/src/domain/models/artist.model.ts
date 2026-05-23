@@ -1,7 +1,11 @@
 import { BaseIdModel } from "../common/models/base-id.model.ts";
 
 export class ArtistModel extends BaseIdModel {
-    artistName!: string;
+	artistName!: string;
 
-    isActive!: boolean;
+	isActive!: boolean;
+
+	createdBy: string = null!;
+
+	modifiedBy: string | null = null;
 }

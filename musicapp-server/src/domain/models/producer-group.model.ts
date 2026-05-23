@@ -1,7 +1,11 @@
 import { BaseIdModel } from "../common/models/base-id.model.ts";
 
 export class ProducerGroupModel extends BaseIdModel {
-    producerGroupName!: string;
+	producerGroupName!: string;
 
-    isActive!: boolean;
+	isActive!: boolean;
+
+	createdBy: string = null!;
+
+	modifiedBy: string | null = null;
 }

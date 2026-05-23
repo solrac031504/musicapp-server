@@ -1,15 +1,19 @@
 import { BaseIdModel } from "../common/models/base-id.model.ts";
 
 export class ProjectModel extends BaseIdModel {
-    projectName!: string;
+	projectName!: string;
 
-    artistGroupId!: number;
+	artistGroupId!: number;
 
-    sceneId!: number | null;
+	sceneId!: number | null;
 
-    projectTypeId!: number;
+	projectTypeId!: number;
 
-    releaseDate!: Date;
+	releaseDate!: Date;
 
-    rating!: number;
+	rating!: number;
+
+	createdBy: string = null!;
+
+	modifiedBy: string | null = null;
 }

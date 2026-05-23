@@ -1,25 +1,29 @@
 import { BaseIdModel } from "../common/models/base-id.model.ts";
 
 export class SongModel extends BaseIdModel {
-    songName!: string;
+	songName!: string;
 
-    artistGroupId!: number;
+	artistGroupId!: number;
 
-    projectId!: number;
+	projectId!: number;
 
-    producerGroupId!: number | null;
+	producerGroupId!: number | null;
 
-    genreId!: number;
+	genreId!: number;
 
-    sceneId!: number;
+	sceneId!: number;
 
-    streamingServiceId!: number;
+	streamingServiceId!: number;
 
-    duration!: number;
+	duration!: number;
 
-    rating!: number;
+	rating!: number;
 
-    isAdded!: boolean;
+	isAdded!: boolean;
 
-    isLocalFile!: boolean;
+	isLocalFile!: boolean;
+
+	createdBy: string = null!;
+
+	modifiedBy: string | null = null;
 }

@@ -1,7 +1,11 @@
 import { BaseIdModel } from "../common/models/base-id.model.ts";
 
 export class GenreModel extends BaseIdModel {
-    genreName!: string;
+	genreName!: string;
 
-    description!: string;
+	description!: string;
+
+	createdBy: string = null!;
+
+	modifiedBy: string | null = null;
 }
