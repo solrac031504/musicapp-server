@@ -51,7 +51,7 @@ dataSource.initialize()
 		);
 
 		// Routing
-		app.route("/artist", artistRoutes(artistController));
+		app.route("/artists", artistRoutes(artistController));
 
 		console.log("Database connected");
 		Deno.serve({ port: PORT }, app.fetch);

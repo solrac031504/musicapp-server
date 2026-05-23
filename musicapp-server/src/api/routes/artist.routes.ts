@@ -9,48 +9,50 @@ import { ArtistController } from "../controllers/artist.controller.ts";
 export function artistRoutes(controller: ArtistController): Hono {
 	const router = new Hono();
 
-	// ADD artist
-	router.post("/add", async (c) => {
+	// POST /artists — create a new artist
+	router.post("/", async (c) => {
 		const body = await c.req.json<AddArtistRequest>();
 
 		const res = await controller.addArtist(body);
 
-		return c.json(res);
+		return c.json(res, 201);
 	});
 
-	// DELETE artist
-	router.delete("/delete", async (c) => {
-		const req = { id: parseInt(c.req.query("id")!) } as DeleteArtistRequest;
-
-		const res = await controller.deleteArtist(req);
-
-		return c.json(res);
-	});
-
-	// LIST artists
-	router.get("/list", async (c) => {
+	// GET /artists — list all artists
+	router.get("/", async (c) => {
 		const res = await controller.listArtist(new ListArtistsRequest());
 
 		return c.json(res);
 	});
 
-	// UPDATE arts
-	router.patch("/update", async (c) => {
-		const body = await c.req.json<UpdateArtistRequest>();
-
-		const res = await controller.updateArtist(body);
-
-		return c.json(res);
-	});
-
-	// Dynamic routes must go after specific routes
-	// GET artist
+	// GET /artists/:id — get a single artist
 	router.get("/:id", async (c) => {
 		const req = { id: parseInt(c.req.param("id")) } as GetArtistRequest;
 
 		const res = await controller.getArtist(req);
 
 		return c.json(res, res.statusCode as 200 | 404);
+	});
+
+	// PATCH /artists/:id — update an artist
+	router.patch("/:id", async (c) => {
+		const body = await c.req.json<UpdateArtistRequest>();
+
+		// Authoritative ID always comes from the URL, not the body
+		body.item.id = parseInt(c.req.param("id"));
+
+		const res = await controller.updateArtist(body);
+
+		return c.json(res, res.statusCode as 200 | 404);
+	});
+
+	// DELETE /artists/:id — delete an artist
+	router.delete("/:id", async (c) => {
+		const req = { id: parseInt(c.req.param("id")) } as DeleteArtistRequest;
+
+		const res = await controller.deleteArtist(req);
+
+		return c.json(res, res.statusCode as 200);
 	});
 
 	return router;
