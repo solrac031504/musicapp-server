@@ -1,16 +1,11 @@
 import { ProducerGroupRepository } from "../../../../../infrastructure/data-access/repositories/producer-group.repository.ts";
-import { BaseRequest } from "../../../../common/requests/base-request.ts";
-import { BaseListResponse } from "../../../../common/responses/base-list-response.ts";
 import { BaseService } from "../../../../common/services/base-service.ts";
 import { ProducerGroupDTO } from "../../../../dto/producer-group.dto.ts";
+import { ListProducerGroupsRequest } from "./list-producer-groups.request.ts";
+import { ListProducerGroupsResponse } from "./list-producer-groups.response.ts";
 
-export class ListProducerGroupsRequest extends BaseRequest {}
-
-export class ListProducerGroupsResponse extends BaseListResponse<ProducerGroupDTO> {
-	constructor(items: ProducerGroupDTO[] = []) {
-		super(items);
-	}
-}
+export { ListProducerGroupsRequest } from "./list-producer-groups.request.ts";
+export { ListProducerGroupsResponse } from "./list-producer-groups.response.ts";
 
 export class ListProducerGroupsService extends BaseService<ListProducerGroupsRequest, ListProducerGroupsResponse> {
 	private readonly repo;

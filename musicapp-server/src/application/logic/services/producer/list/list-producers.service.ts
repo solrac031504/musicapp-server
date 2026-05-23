@@ -1,16 +1,11 @@
 import { ProducerRepository } from "../../../../../infrastructure/data-access/repositories/producer.repository.ts";
-import { BaseRequest } from "../../../../common/requests/base-request.ts";
-import { BaseListResponse } from "../../../../common/responses/base-list-response.ts";
 import { BaseService } from "../../../../common/services/base-service.ts";
 import { ProducerDTO } from "../../../../dto/producer.dto.ts";
+import { ListProducersRequest } from "./list-producers.request.ts";
+import { ListProducersResponse } from "./list-producers.response.ts";
 
-export class ListProducersRequest extends BaseRequest {}
-
-export class ListProducersResponse extends BaseListResponse<ProducerDTO> {
-	constructor(items: ProducerDTO[] = []) {
-		super(items);
-	}
-}
+export { ListProducersRequest } from "./list-producers.request.ts";
+export { ListProducersResponse } from "./list-producers.response.ts";
 
 export class ListProducersService extends BaseService<ListProducersRequest, ListProducersResponse> {
 	private readonly repo;
