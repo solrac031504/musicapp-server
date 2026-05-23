@@ -7,11 +7,17 @@ import { ArtistGroupController } from "./api/controllers/artist-group.controller
 import { ArtistController } from "./api/controllers/artist.controller.ts";
 import { GenreHierarchyController } from "./api/controllers/genre-hierarchy.controller.ts";
 import { GenreController } from "./api/controllers/genre.controller.ts";
+import { ProducerGroupMembershipController } from "./api/controllers/producer-group-membership.controller.ts";
+import { ProducerGroupController } from "./api/controllers/producer-group.controller.ts";
+import { ProducerController } from "./api/controllers/producer.controller.ts";
 import { artistGroupMembershipRoutes } from "./api/routes/artist-group-membership.routes.ts";
 import { artistGroupRoutes } from "./api/routes/artist-group.routes.ts";
 import { artistRoutes } from "./api/routes/artist.routes.ts";
 import { genreHierarchyRoutes } from "./api/routes/genre-hierarchy.routes.ts";
 import { genreRoutes } from "./api/routes/genre.routes.ts";
+import { producerGroupMembershipRoutes } from "./api/routes/producer-group-membership.routes.ts";
+import { producerGroupRoutes } from "./api/routes/producer-group.routes.ts";
+import { producerRoutes } from "./api/routes/producer.routes.ts";
 import { AddArtistGroupMembershipService } from "./application/logic/services/artist-group-membership/add/add-artist-group-membership.service.ts";
 import { DeleteArtistGroupMembershipService } from "./application/logic/services/artist-group-membership/delete/delete-artist-group-membership.service.ts";
 import { GetArtistGroupMembershipService } from "./application/logic/services/artist-group-membership/get/get-artist-group-membership.service.ts";
@@ -37,12 +43,30 @@ import { DeleteGenreService } from "./application/logic/services/genre/delete/de
 import { GetGenreService } from "./application/logic/services/genre/get/get-genre.service.ts";
 import { ListGenresService } from "./application/logic/services/genre/list/list-genres.service.ts";
 import { UpdateGenreService } from "./application/logic/services/genre/update/update-genre.service.ts";
+import { AddProducerGroupMembershipService } from "./application/logic/services/producer-group-membership/add/add-producer-group-membership.service.ts";
+import { DeleteProducerGroupMembershipService } from "./application/logic/services/producer-group-membership/delete/delete-producer-group-membership.service.ts";
+import { GetProducerGroupMembershipService } from "./application/logic/services/producer-group-membership/get/get-producer-group-membership.service.ts";
+import { ListProducerGroupMembershipsService } from "./application/logic/services/producer-group-membership/list/list-producer-group-memberships.service.ts";
+import { UpdateProducerGroupMembershipService } from "./application/logic/services/producer-group-membership/update/update-producer-group-membership.service.ts";
+import { AddProducerGroupService } from "./application/logic/services/producer-group/add/add-producer-group.service.ts";
+import { DeleteProducerGroupService } from "./application/logic/services/producer-group/delete/delete-producer-group.service.ts";
+import { GetProducerGroupService } from "./application/logic/services/producer-group/get/get-producer-group.service.ts";
+import { ListProducerGroupsService } from "./application/logic/services/producer-group/list/list-producer-groups.service.ts";
+import { UpdateProducerGroupService } from "./application/logic/services/producer-group/update/update-producer-group.service.ts";
+import { AddProducerService } from "./application/logic/services/producer/add/add-producer.service.ts";
+import { DeleteProducerService } from "./application/logic/services/producer/delete/delete-producer.service.ts";
+import { GetProducerService } from "./application/logic/services/producer/get/get-producer.service.ts";
+import { ListProducersService } from "./application/logic/services/producer/list/list-producers.service.ts";
+import { UpdateProducerService } from "./application/logic/services/producer/update/update-producer.service.ts";
 import { dataSource } from "./infrastructure/data-access/databases/database.ts";
 import { ArtistGroupMembershipRepository } from "./infrastructure/data-access/repositories/artist-group-membership.repository.ts";
 import { ArtistGroupRepository } from "./infrastructure/data-access/repositories/artist-group.repository.ts";
 import { ArtistRepository } from "./infrastructure/data-access/repositories/artist.repository.ts";
 import { GenreHierarchyRepository } from "./infrastructure/data-access/repositories/genre-hierarchy.repository.ts";
 import { GenreRepository } from "./infrastructure/data-access/repositories/genre.repository.ts";
+import { ProducerGroupMembershipRepository } from "./infrastructure/data-access/repositories/producer-group-membership.repository.ts";
+import { ProducerGroupRepository } from "./infrastructure/data-access/repositories/producer-group.repository.ts";
+import { ProducerRepository } from "./infrastructure/data-access/repositories/producer.repository.ts";
 
 const app = new Hono();
 
@@ -70,6 +94,10 @@ dataSource.initialize()
 		const artistGroupRepository = new ArtistGroupRepository(dataSource);
 		const artistGroupMembershipRepository = new ArtistGroupMembershipRepository(dataSource);
 		const genreRepository = new GenreRepository(dataSource);
+		const genreHierarchyRepository = new GenreHierarchyRepository(dataSource);
+		const producerRepository = new ProducerRepository(dataSource);
+		const producerGroupRepository = new ProducerGroupRepository(dataSource);
+		const producerGroupMembershipRepository = new ProducerGroupMembershipRepository(dataSource);
 
 		// Add services
 		const addArtistService = new AddArtistService(artistRepository);
@@ -96,7 +124,23 @@ dataSource.initialize()
 		const listGenresService = new ListGenresService(genreRepository);
 		const updateGenreService = new UpdateGenreService(genreRepository);
 
-		const genreHierarchyRepository = new GenreHierarchyRepository(dataSource);
+		const addProducerService = new AddProducerService(producerRepository);
+		const deleteProducerService = new DeleteProducerService(producerRepository);
+		const getProducerService = new GetProducerService(producerRepository);
+		const listProducersService = new ListProducersService(producerRepository);
+		const updateProducerService = new UpdateProducerService(producerRepository);
+
+		const addProducerGroupService = new AddProducerGroupService(producerGroupRepository);
+		const deleteProducerGroupService = new DeleteProducerGroupService(producerGroupRepository);
+		const getProducerGroupService = new GetProducerGroupService(producerGroupRepository);
+		const listProducerGroupsService = new ListProducerGroupsService(producerGroupRepository);
+		const updateProducerGroupService = new UpdateProducerGroupService(producerGroupRepository);
+
+		const addProducerGroupMembershipService = new AddProducerGroupMembershipService(producerGroupMembershipRepository);
+		const deleteProducerGroupMembershipService = new DeleteProducerGroupMembershipService(producerGroupMembershipRepository);
+		const getProducerGroupMembershipService = new GetProducerGroupMembershipService(producerGroupMembershipRepository);
+		const listProducerGroupMembershipsService = new ListProducerGroupMembershipsService(producerGroupMembershipRepository);
+		const updateProducerGroupMembershipService = new UpdateProducerGroupMembershipService(producerGroupMembershipRepository);
 
 		const addGenreHierarchyService = new AddGenreHierarchyService(genreHierarchyRepository);
 		const deleteGenreHierarchyService = new DeleteGenreHierarchyService(genreHierarchyRepository);
@@ -145,10 +189,37 @@ dataSource.initialize()
 			updateGenreHierarchyService,
 		);
 
+		const producerController = new ProducerController(
+			addProducerService,
+			deleteProducerService,
+			getProducerService,
+			listProducersService,
+			updateProducerService,
+		);
+
+		const producerGroupController = new ProducerGroupController(
+			addProducerGroupService,
+			deleteProducerGroupService,
+			getProducerGroupService,
+			listProducerGroupsService,
+			updateProducerGroupService,
+		);
+
+		const producerGroupMembershipController = new ProducerGroupMembershipController(
+			addProducerGroupMembershipService,
+			deleteProducerGroupMembershipService,
+			getProducerGroupMembershipService,
+			listProducerGroupMembershipsService,
+			updateProducerGroupMembershipService,
+		);
+
 		// Routing
 		app.route("/artists", artistRoutes(artistController));
 		app.route("/artist-groups", artistGroupRoutes(artistGroupController));
 		app.route("/artist-group-memberships", artistGroupMembershipRoutes(artistGroupMembershipController));
+		app.route("/producers", producerRoutes(producerController));
+		app.route("/producer-groups", producerGroupRoutes(producerGroupController));
+		app.route("/producer-group-memberships", producerGroupMembershipRoutes(producerGroupMembershipController));
 		app.route("/genres", genreRoutes(genreController));
 		app.route("/genre-hierarchies", genreHierarchyRoutes(genreHierarchyController));
 
