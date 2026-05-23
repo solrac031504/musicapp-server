@@ -1,9 +1,9 @@
 import { Hono } from "hono";
-import { AddProducerGroupMembershipRequest } from "../../application/logic/services/producer-group-membership/add/add-producer-group-membership.service.ts";
-import { DeleteProducerGroupMembershipRequest } from "../../application/logic/services/producer-group-membership/delete/delete-producer-group-membership.service.ts";
-import { GetProducerGroupMembershipRequest } from "../../application/logic/services/producer-group-membership/get/get-producer-group-membership.service.ts";
-import { ListProducerGroupMembershipsRequest } from "../../application/logic/services/producer-group-membership/list/list-producer-group-memberships.service.ts";
-import { UpdateProducerGroupMembershipRequest } from "../../application/logic/services/producer-group-membership/update/update-producer-group-membership.service.ts";
+import { AddProducerGroupMembershipRequest } from "../../application/logic/services/producer-group-membership/add/add-producer-group-membership.request.ts";
+import { DeleteProducerGroupMembershipRequest } from "../../application/logic/services/producer-group-membership/delete/delete-producer-group-membership.request.ts";
+import { GetProducerGroupMembershipRequest } from "../../application/logic/services/producer-group-membership/get/get-producer-group-membership.request.ts";
+import { ListProducerGroupMembershipsRequest } from "../../application/logic/services/producer-group-membership/list/list-producer-group-memberships.request.ts";
+import { UpdateProducerGroupMembershipRequest } from "../../application/logic/services/producer-group-membership/update/update-producer-group-membership.request.ts";
 import { ProducerGroupMembershipController } from "../controllers/producer-group-membership.controller.ts";
 
 export function producerGroupMembershipRoutes(controller: ProducerGroupMembershipController): Hono {

@@ -1,9 +1,9 @@
 import { Hono } from "hono";
-import { AddProducerRequest } from "../../application/logic/services/producer/add/add-producer.service.ts";
-import { DeleteProducerRequest } from "../../application/logic/services/producer/delete/delete-producer.service.ts";
-import { GetProducerRequest } from "../../application/logic/services/producer/get/get-producer.service.ts";
-import { ListProducersRequest } from "../../application/logic/services/producer/list/list-producers.service.ts";
-import { UpdateProducerRequest } from "../../application/logic/services/producer/update/update-producer.service.ts";
+import { AddProducerRequest } from "../../application/logic/services/producer/add/add-producer.request.ts";
+import { DeleteProducerRequest } from "../../application/logic/services/producer/delete/delete-producer.request.ts";
+import { GetProducerRequest } from "../../application/logic/services/producer/get/get-producer.request.ts";
+import { ListProducersRequest } from "../../application/logic/services/producer/list/list-producers.request.ts";
+import { UpdateProducerRequest } from "../../application/logic/services/producer/update/update-producer.request.ts";
 import { ProducerController } from "../controllers/producer.controller.ts";
 
 export function producerRoutes(controller: ProducerController): Hono {

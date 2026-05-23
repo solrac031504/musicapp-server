@@ -1,9 +1,9 @@
 import { Hono } from "hono";
-import { AddProducerGroupRequest } from "../../application/logic/services/producer-group/add/add-producer-group.service.ts";
-import { DeleteProducerGroupRequest } from "../../application/logic/services/producer-group/delete/delete-producer-group.service.ts";
-import { GetProducerGroupRequest } from "../../application/logic/services/producer-group/get/get-producer-group.service.ts";
-import { ListProducerGroupsRequest } from "../../application/logic/services/producer-group/list/list-producer-groups.service.ts";
-import { UpdateProducerGroupRequest } from "../../application/logic/services/producer-group/update/update-producer-group.service.ts";
+import { AddProducerGroupRequest } from "../../application/logic/services/producer-group/add/add-producer-group.request.ts";
+import { DeleteProducerGroupRequest } from "../../application/logic/services/producer-group/delete/delete-producer-group.request.ts";
+import { GetProducerGroupRequest } from "../../application/logic/services/producer-group/get/get-producer-group.request.ts";
+import { ListProducerGroupsRequest } from "../../application/logic/services/producer-group/list/list-producer-groups.request.ts";
+import { UpdateProducerGroupRequest } from "../../application/logic/services/producer-group/update/update-producer-group.request.ts";
 import { ProducerGroupController } from "../controllers/producer-group.controller.ts";
 
 export function producerGroupRoutes(controller: ProducerGroupController): Hono {
