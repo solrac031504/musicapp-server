@@ -1,6 +1,10 @@
 import { BaseIdModel } from "../common/models/base-id.model.ts";
 export class ArtistGroupMembershipModel extends BaseIdModel {
-    artistGroupId!: number;
+	artistGroupId!: number;
 
-    artistId!: number;
+	artistId!: number;
+
+	createdBy: string = null!;
+
+	modifiedBy: string | null = null;
 }
