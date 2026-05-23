@@ -35,11 +35,8 @@ export function artistRoutes(controller: ArtistController): Hono {
 	});
 
 	// PATCH /artists/:id — update an artist
-	router.patch("/:id", async (c) => {
+	router.patch("/", async (c) => {
 		const body = await c.req.json<UpdateArtistRequest>();
-
-		// Authoritative ID always comes from the URL, not the body
-		body.item.id = parseInt(c.req.param("id"));
 
 		const res = await controller.updateArtist(body);
 
