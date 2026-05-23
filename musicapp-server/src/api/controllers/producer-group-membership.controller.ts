@@ -1,8 +1,28 @@
-import { AddProducerGroupMembershipRequest, AddProducerGroupMembershipResponse, AddProducerGroupMembershipService } from "../../application/logic/services/producer-group-membership/add/add-producer-group-membership.service.ts";
-import { DeleteProducerGroupMembershipRequest, DeleteProducerGroupMembershipResponse, DeleteProducerGroupMembershipService } from "../../application/logic/services/producer-group-membership/delete/delete-producer-group-membership.service.ts";
-import { GetProducerGroupMembershipRequest, GetProducerGroupMembershipResponse, GetProducerGroupMembershipService } from "../../application/logic/services/producer-group-membership/get/get-producer-group-membership.service.ts";
-import { ListProducerGroupMembershipsRequest, ListProducerGroupMembershipsResponse, ListProducerGroupMembershipsService } from "../../application/logic/services/producer-group-membership/list/list-producer-group-memberships.service.ts";
-import { UpdateProducerGroupMembershipRequest, UpdateProducerGroupMembershipResponse, UpdateProducerGroupMembershipService } from "../../application/logic/services/producer-group-membership/update/update-producer-group-membership.service.ts";
+import {
+	AddProducerGroupMembershipRequest,
+	AddProducerGroupMembershipResponse,
+	AddProducerGroupMembershipService,
+} from "../../application/logic/services/producer-group-membership/add/add-producer-group-membership.service.ts";
+import {
+	DeleteProducerGroupMembershipRequest,
+	DeleteProducerGroupMembershipResponse,
+	DeleteProducerGroupMembershipService,
+} from "../../application/logic/services/producer-group-membership/delete/delete-producer-group-membership.service.ts";
+import {
+	GetProducerGroupMembershipRequest,
+	GetProducerGroupMembershipResponse,
+	GetProducerGroupMembershipService,
+} from "../../application/logic/services/producer-group-membership/get/get-producer-group-membership.service.ts";
+import {
+	ListProducerGroupMembershipsRequest,
+	ListProducerGroupMembershipsResponse,
+	ListProducerGroupMembershipsService,
+} from "../../application/logic/services/producer-group-membership/list/list-producer-group-memberships.service.ts";
+import {
+	UpdateProducerGroupMembershipRequest,
+	UpdateProducerGroupMembershipResponse,
+	UpdateProducerGroupMembershipService,
+} from "../../application/logic/services/producer-group-membership/update/update-producer-group-membership.service.ts";
 
 export class ProducerGroupMembershipController {
 	private readonly addProducerGroupMembershipService;

@@ -1,12 +1,9 @@
-import { BaseDTORequest } from "../../../../common/requests/base-dto-request.ts";
-import { BaseItemResponse } from "../../../../common/responses/base-item-response.ts";
-import { BaseListResponse } from "../../../../common/responses/base-list-response.ts";
-import { BaseResponse } from "../../../../common/responses/base-response.ts";
-import { BaseRequest } from "../../../../common/requests/base-request.ts";
-import { BaseService } from "../../../../common/services/base-service.ts";
-import { ProducerDTO } from "../../../../dto/producer.dto.ts";
 import { ProducerModel } from "../../../../../domain/models/producer.model.ts";
 import { ProducerRepository } from "../../../../../infrastructure/data-access/repositories/producer.repository.ts";
+import { BaseDTORequest } from "../../../../common/requests/base-dto-request.ts";
+import { BaseItemResponse } from "../../../../common/responses/base-item-response.ts";
+import { BaseService } from "../../../../common/services/base-service.ts";
+import { ProducerDTO } from "../../../../dto/producer.dto.ts";
 
 export class AddProducerRequest extends BaseDTORequest<ProducerDTO> {}
 

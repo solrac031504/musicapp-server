@@ -1,9 +1,9 @@
+import { ProducerGroupModel } from "../../../../../domain/models/producer-group.model.ts";
+import { ProducerGroupRepository } from "../../../../../infrastructure/data-access/repositories/producer-group.repository.ts";
 import { BaseDTORequest } from "../../../../common/requests/base-dto-request.ts";
 import { BaseItemResponse } from "../../../../common/responses/base-item-response.ts";
 import { BaseService } from "../../../../common/services/base-service.ts";
 import { ProducerGroupDTO } from "../../../../dto/producer-group.dto.ts";
-import { ProducerGroupModel } from "../../../../../domain/models/producer-group.model.ts";
-import { ProducerGroupRepository } from "../../../../../infrastructure/data-access/repositories/producer-group.repository.ts";
 
 export class UpdateProducerGroupRequest extends BaseDTORequest<ProducerGroupDTO> {}
 

@@ -1,9 +1,9 @@
+import { ProducerGroupMembershipModel } from "../../../../../domain/models/producer-group-membership.model.ts";
+import { ProducerGroupMembershipRepository } from "../../../../../infrastructure/data-access/repositories/producer-group-membership.repository.ts";
 import { BaseDTORequest } from "../../../../common/requests/base-dto-request.ts";
 import { BaseItemResponse } from "../../../../common/responses/base-item-response.ts";
 import { BaseService } from "../../../../common/services/base-service.ts";
 import { ProducerGroupMembershipDTO } from "../../../../dto/producer-group-membership.dto.ts";
-import { ProducerGroupMembershipModel } from "../../../../../domain/models/producer-group-membership.model.ts";
-import { ProducerGroupMembershipRepository } from "../../../../../infrastructure/data-access/repositories/producer-group-membership.repository.ts";
 
 export class AddProducerGroupMembershipRequest extends BaseDTORequest<ProducerGroupMembershipDTO> {}
 

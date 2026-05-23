@@ -1,8 +1,8 @@
+import { ProducerGroupRepository } from "../../../../../infrastructure/data-access/repositories/producer-group.repository.ts";
 import { BaseRequest } from "../../../../common/requests/base-request.ts";
 import { BaseListResponse } from "../../../../common/responses/base-list-response.ts";
 import { BaseService } from "../../../../common/services/base-service.ts";
 import { ProducerGroupDTO } from "../../../../dto/producer-group.dto.ts";
-import { ProducerGroupRepository } from "../../../../../infrastructure/data-access/repositories/producer-group.repository.ts";
 
 export class ListProducerGroupsRequest extends BaseRequest {}
 

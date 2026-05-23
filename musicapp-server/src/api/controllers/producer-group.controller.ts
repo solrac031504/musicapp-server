@@ -1,8 +1,28 @@
-import { AddProducerGroupRequest, AddProducerGroupResponse, AddProducerGroupService } from "../../application/logic/services/producer-group/add/add-producer-group.service.ts";
-import { DeleteProducerGroupRequest, DeleteProducerGroupResponse, DeleteProducerGroupService } from "../../application/logic/services/producer-group/delete/delete-producer-group.service.ts";
-import { GetProducerGroupRequest, GetProducerGroupResponse, GetProducerGroupService } from "../../application/logic/services/producer-group/get/get-producer-group.service.ts";
-import { ListProducerGroupsRequest, ListProducerGroupsResponse, ListProducerGroupsService } from "../../application/logic/services/producer-group/list/list-producer-groups.service.ts";
-import { UpdateProducerGroupRequest, UpdateProducerGroupResponse, UpdateProducerGroupService } from "../../application/logic/services/producer-group/update/update-producer-group.service.ts";
+import {
+	AddProducerGroupRequest,
+	AddProducerGroupResponse,
+	AddProducerGroupService,
+} from "../../application/logic/services/producer-group/add/add-producer-group.service.ts";
+import {
+	DeleteProducerGroupRequest,
+	DeleteProducerGroupResponse,
+	DeleteProducerGroupService,
+} from "../../application/logic/services/producer-group/delete/delete-producer-group.service.ts";
+import {
+	GetProducerGroupRequest,
+	GetProducerGroupResponse,
+	GetProducerGroupService,
+} from "../../application/logic/services/producer-group/get/get-producer-group.service.ts";
+import {
+	ListProducerGroupsRequest,
+	ListProducerGroupsResponse,
+	ListProducerGroupsService,
+} from "../../application/logic/services/producer-group/list/list-producer-groups.service.ts";
+import {
+	UpdateProducerGroupRequest,
+	UpdateProducerGroupResponse,
+	UpdateProducerGroupService,
+} from "../../application/logic/services/producer-group/update/update-producer-group.service.ts";
 
 export class ProducerGroupController {
 	private readonly addProducerGroupService;

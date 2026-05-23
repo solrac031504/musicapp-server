@@ -1,8 +1,16 @@
 import { AddProducerRequest, AddProducerResponse, AddProducerService } from "../../application/logic/services/producer/add/add-producer.service.ts";
-import { DeleteProducerRequest, DeleteProducerResponse, DeleteProducerService } from "../../application/logic/services/producer/delete/delete-producer.service.ts";
+import {
+	DeleteProducerRequest,
+	DeleteProducerResponse,
+	DeleteProducerService,
+} from "../../application/logic/services/producer/delete/delete-producer.service.ts";
 import { GetProducerRequest, GetProducerResponse, GetProducerService } from "../../application/logic/services/producer/get/get-producer.service.ts";
 import { ListProducersRequest, ListProducersResponse, ListProducersService } from "../../application/logic/services/producer/list/list-producers.service.ts";
-import { UpdateProducerRequest, UpdateProducerResponse, UpdateProducerService } from "../../application/logic/services/producer/update/update-producer.service.ts";
+import {
+	UpdateProducerRequest,
+	UpdateProducerResponse,
+	UpdateProducerService,
+} from "../../application/logic/services/producer/update/update-producer.service.ts";
 
 export class ProducerController {
 	private readonly addProducerService;
