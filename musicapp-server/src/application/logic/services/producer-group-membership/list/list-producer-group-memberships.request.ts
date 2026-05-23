@@ -1,3 +1,3 @@
 import { BaseRequest } from "../../../../common/requests/base-request.ts";
 
-export class ListProducerGroupMembershipRequest extends BaseRequest {}
+export class ListProducerGroupMembershipsRequest extends BaseRequest {}

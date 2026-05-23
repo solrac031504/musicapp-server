@@ -4,24 +4,21 @@ import { ProducerGroupMembershipDTO } from "../../../../dto/producer-group-membe
 import { GetProducerGroupMembershipRequest } from "./get-producer-group-membership.request.ts";
 import { GetProducerGroupMembershipResponse } from "./get-producer-group-membership.response.ts";
 
-export { GetProducerGroupMembershipRequest } from "./get-producer-group-membership.request.ts";
-export { GetProducerGroupMembershipResponse } from "./get-producer-group-membership.response.ts";
-
 export class GetProducerGroupMembershipService extends BaseService<GetProducerGroupMembershipRequest, GetProducerGroupMembershipResponse> {
-    private readonly repo;
+	private readonly repo;
 
-    constructor(repo: ProducerGroupMembershipRepository) {
-        super();
-        this.repo = repo;
-    }
+	constructor(repo: ProducerGroupMembershipRepository) {
+		super();
+		this.repo = repo;
+	}
 
-    public override async execute(
-        req: GetProducerGroupMembershipRequest,
-    ): Promise<GetProducerGroupMembershipResponse> {
-        const model = await this.repo.getById(req.id);
+	public override async execute(
+		req: GetProducerGroupMembershipRequest,
+	): Promise<GetProducerGroupMembershipResponse> {
+		const model = await this.repo.getById(req.id);
 
-        if (!model) return new GetProducerGroupMembershipResponse().notFound();
+		if (!model) return new GetProducerGroupMembershipResponse().notFound();
 
-        return new GetProducerGroupMembershipResponse(new ProducerGroupMembershipDTO(model));
-    }
+		return new GetProducerGroupMembershipResponse(new ProducerGroupMembershipDTO(model));
+	}
 }

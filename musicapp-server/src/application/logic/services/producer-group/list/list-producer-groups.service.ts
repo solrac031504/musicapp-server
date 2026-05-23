@@ -4,9 +4,6 @@ import { ProducerGroupDTO } from "../../../../dto/producer-group.dto.ts";
 import { ListProducerGroupsRequest } from "./list-producer-groups.request.ts";
 import { ListProducerGroupsResponse } from "./list-producer-groups.response.ts";
 
-export { ListProducerGroupsRequest } from "./list-producer-groups.request.ts";
-export { ListProducerGroupsResponse } from "./list-producer-groups.response.ts";
-
 export class ListProducerGroupsService extends BaseService<ListProducerGroupsRequest, ListProducerGroupsResponse> {
 	private readonly repo;
 
