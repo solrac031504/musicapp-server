@@ -31,8 +31,10 @@ export function producerRoutes(controller: ProducerController): Hono {
 		return c.json(res, res.statusCode as 200 | 404);
 	});
 
-	router.patch("/", async (c) => {
+	router.patch("/:id", async (c) => {
 		const body = await c.req.json<UpdateProducerRequest>();
+
+		body.item.id = parseInt(c.req.param("id"));
 
 		const res = await controller.updateProducer(body);
 

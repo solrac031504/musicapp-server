@@ -35,8 +35,10 @@ export function streamingServiceRoutes(controller: StreamingServiceController): 
 	});
 
 	// PATCH /streaming-services/:id — update a streaming service
-	router.patch("/", async (c) => {
+	router.patch("/:id", async (c) => {
 		const body = await c.req.json<UpdateStreamingServiceRequest>();
+
+		body.item.id = parseInt(c.req.param("id"));
 
 		const res = await controller.updateStreamingService(body);
 

@@ -35,8 +35,10 @@ export function artistGroupRoutes(controller: ArtistGroupController): Hono {
 	});
 
 	// PATCH /artist-groups/:id — update an artist group
-	router.patch("/", async (c) => {
+	router.patch("/:id", async (c) => {
 		const body = await c.req.json<UpdateArtistGroupRequest>();
+
+		body.item.id = parseInt(c.req.param("id"));
 
 		const res = await controller.updateArtistGroup(body);
 

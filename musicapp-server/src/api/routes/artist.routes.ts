@@ -35,8 +35,10 @@ export function artistRoutes(controller: ArtistController): Hono {
 	});
 
 	// PATCH /artists/:id — update an artist
-	router.patch("/", async (c) => {
+	router.patch("/:id", async (c) => {
 		const body = await c.req.json<UpdateArtistRequest>();
+
+		body.item.id = parseInt(c.req.param("id"));
 
 		const res = await controller.updateArtist(body);
 

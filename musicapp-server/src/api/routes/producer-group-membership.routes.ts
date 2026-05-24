@@ -31,8 +31,10 @@ export function producerGroupMembershipRoutes(controller: ProducerGroupMembershi
 		return c.json(res, res.statusCode as 200 | 404);
 	});
 
-	router.patch("/", async (c) => {
+	router.patch("/:id", async (c) => {
 		const body = await c.req.json<UpdateProducerGroupMembershipRequest>();
+
+		body.item.id = parseInt(c.req.param("id"));
 
 		const res = await controller.updateProducerGroupMembership(body);
 

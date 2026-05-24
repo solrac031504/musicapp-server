@@ -39,8 +39,10 @@ export function genreHierarchyRoutes(
 	});
 
 	// PATCH /genre-hierarchies/:id — update a genre hierarchy record
-	router.patch("/", async (c) => {
+	router.patch("/:id", async (c) => {
 		const body = await c.req.json<UpdateGenreHierarchyRequest>();
+
+		body.item.id = parseInt(c.req.param("id"));
 
 		const res = await controller.updateGenreHierarchy(body);
 

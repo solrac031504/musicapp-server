@@ -35,8 +35,10 @@ export function projectRoutes(controller: ProjectController): Hono {
 	});
 
 	// PATCH /projects/:id — update a project
-	router.patch("/", async (c) => {
+	router.patch("/:id", async (c) => {
 		const body = await c.req.json<UpdateProjectRequest>();
+
+		body.item.id = parseInt(c.req.param("id"));
 
 		const res = await controller.updateProject(body);
 

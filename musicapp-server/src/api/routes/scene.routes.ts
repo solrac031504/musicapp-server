@@ -35,8 +35,10 @@ export function sceneRoutes(controller: SceneController): Hono {
 	});
 
 	// PATCH /scenes/:id — update a scene
-	router.patch("/", async (c) => {
+	router.patch("/:id", async (c) => {
 		const body = await c.req.json<UpdateSceneRequest>();
+
+		body.item.id = parseInt(c.req.param("id"));
 
 		const res = await controller.updateScene(body);
 

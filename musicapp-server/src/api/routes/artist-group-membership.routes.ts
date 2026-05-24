@@ -35,8 +35,10 @@ export function artistGroupMembershipRoutes(controller: ArtistGroupMembershipCon
 	});
 
 	// PATCH /artist-group-memberships/:id — update a membership
-	router.patch("/", async (c) => {
+	router.patch("/:id", async (c) => {
 		const body = await c.req.json<UpdateArtistGroupMembershipRequest>();
+
+		body.item.id = parseInt(c.req.param("id"));
 
 		const res = await controller.updateArtistGroupMembership(body);
 
