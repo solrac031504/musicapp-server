@@ -14,6 +14,7 @@ import { ProducerController } from "./api/controllers/producer.controller.ts";
 import { ProjectTypeController } from "./api/controllers/project-type.controller.ts";
 import { ProjectController } from "./api/controllers/project.controller.ts";
 import { SceneController } from "./api/controllers/scene.controller.ts";
+import { SongController } from "./api/controllers/song.controller.ts";
 import { artistGroupMembershipRoutes } from "./api/routes/artist-group-membership.routes.ts";
 import { artistGroupRoutes } from "./api/routes/artist-group.routes.ts";
 import { artistRoutes } from "./api/routes/artist.routes.ts";
@@ -25,6 +26,7 @@ import { producerRoutes } from "./api/routes/producer.routes.ts";
 import { projectTypeRoutes } from "./api/routes/project-type.routes.ts";
 import { projectRoutes } from "./api/routes/project.routes.ts";
 import { sceneRoutes } from "./api/routes/scene.routes.ts";
+import { songRoutes } from "./api/routes/song.routes.ts";
 import { AddArtistGroupMembershipService } from "./application/logic/services/artist-group-membership/add/add-artist-group-membership.service.ts";
 import { DeleteArtistGroupMembershipService } from "./application/logic/services/artist-group-membership/delete/delete-artist-group-membership.service.ts";
 import { GetArtistGroupMembershipService } from "./application/logic/services/artist-group-membership/get/get-artist-group-membership.service.ts";
@@ -80,6 +82,11 @@ import { DeleteSceneService } from "./application/logic/services/scene/delete/de
 import { GetSceneService } from "./application/logic/services/scene/get/get-scene.service.ts";
 import { ListScenesService } from "./application/logic/services/scene/list/list-scenes.service.ts";
 import { UpdateSceneService } from "./application/logic/services/scene/update/update-scene.service.ts";
+import { AddSongService } from "./application/logic/services/song/add/add-song.service.ts";
+import { DeleteSongService } from "./application/logic/services/song/delete/delete-song.service.ts";
+import { GetSongService } from "./application/logic/services/song/get/get-song.service.ts";
+import { ListSongsService } from "./application/logic/services/song/list/list-songs.service.ts";
+import { UpdateSongService } from "./application/logic/services/song/update/update-song.service.ts";
 import { dataSource } from "./infrastructure/data-access/databases/database.ts";
 import { ArtistGroupMembershipRepository } from "./infrastructure/data-access/repositories/artist-group-membership.repository.ts";
 import { ArtistGroupRepository } from "./infrastructure/data-access/repositories/artist-group.repository.ts";
@@ -92,6 +99,7 @@ import { ProducerRepository } from "./infrastructure/data-access/repositories/pr
 import { ProjectTypeRepository } from "./infrastructure/data-access/repositories/project-type.repository.ts";
 import { ProjectRepository } from "./infrastructure/data-access/repositories/project.repository.ts";
 import { SceneRepository } from "./infrastructure/data-access/repositories/scene.repository.ts";
+import { SongRepository } from "./infrastructure/data-access/repositories/song.repository.ts";
 // #endregion
 
 const app = new Hono();
@@ -127,6 +135,7 @@ dataSource.initialize()
 		const projectTypeRepository = new ProjectTypeRepository(dataSource);
 		const projectRepository = new ProjectRepository(dataSource);
 		const sceneRepository = new SceneRepository(dataSource);
+		const songRepository = new SongRepository(dataSource);
 
 		// Add services
 		const addArtistService = new AddArtistService(artistRepository);
@@ -194,6 +203,12 @@ dataSource.initialize()
 		const getSceneService = new GetSceneService(sceneRepository);
 		const listScenesService = new ListScenesService(sceneRepository);
 		const updateSceneService = new UpdateSceneService(sceneRepository);
+
+		const addSongService = new AddSongService(songRepository);
+		const deleteSongService = new DeleteSongService(songRepository);
+		const getSongService = new GetSongService(songRepository);
+		const listSongsService = new ListSongsService(songRepository);
+		const updateSongService = new UpdateSongService(songRepository);
 
 		// Add controllers
 		const artistController = new ArtistController(
@@ -284,6 +299,14 @@ dataSource.initialize()
 			updateSceneService,
 		);
 
+		const songController = new SongController(
+			addSongService,
+			deleteSongService,
+			getSongService,
+			listSongsService,
+			updateSongService,
+		);
+
 		// Routing
 		app.route("/artists", artistRoutes(artistController));
 		app.route("/artist-groups", artistGroupRoutes(artistGroupController));
@@ -296,6 +319,7 @@ dataSource.initialize()
 		app.route("/project-types", projectTypeRoutes(projectTypeController));
 		app.route("/projects", projectRoutes(projectController));
 		app.route("/scenes", sceneRoutes(sceneController));
+		app.route("/songs", songRoutes(songController));
 
 		Deno.serve({ port: PORT }, app.fetch);
 		console.log(`Server listening on port ${PORT}`);
