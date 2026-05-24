@@ -5,24 +5,23 @@ import { AddProjectResponseMapper } from "../../../mappers/response-mappers/add-
 import { AddProjectRequest } from "../add/add-project.request.ts";
 import { AddProjectResponse } from "../add/add-project.response.ts";
 
-export class AddProjectService
-    extends BaseService<AddProjectRequest, AddProjectResponse> {
-    private readonly repo;
-    private readonly reqMapper = new AddProjectRequestMapper();
-    private readonly resMapper = new AddProjectResponseMapper();
+export class AddProjectService extends BaseService<AddProjectRequest, AddProjectResponse> {
+	private readonly repo;
+	private readonly reqMapper = new AddProjectRequestMapper();
+	private readonly resMapper = new AddProjectResponseMapper();
 
-    constructor(repo: ProjectRepository) {
-        super();
-        this.repo = repo;
-    }
+	constructor(repo: ProjectRepository) {
+		super();
+		this.repo = repo;
+	}
 
-    public override async execute(
-        req: AddProjectRequest,
-    ): Promise<AddProjectResponse> {
-        const model = this.reqMapper.map(req);
+	public override async execute(
+		req: AddProjectRequest,
+	): Promise<AddProjectResponse> {
+		const model = this.reqMapper.map(req);
 
-        const addedModel = await this.repo.add(model);
+		const addedModel = await this.repo.add(model);
 
-        return this.resMapper.map(addedModel);
-    }
+		return this.resMapper.map(addedModel);
+	}
 }

@@ -4,21 +4,20 @@ import { ListProjectsResponseMapper } from "../../../mappers/response-mappers/li
 import { ListProjectsRequest } from "./list-projects.request.ts";
 import { ListProjectsResponse } from "./list-projects.response.ts";
 
-export class ListProjectsService
-    extends BaseService<ListProjectsRequest, ListProjectsResponse> {
-    private readonly repo;
-    private readonly resMapper = new ListProjectsResponseMapper();
+export class ListProjectsService extends BaseService<ListProjectsRequest, ListProjectsResponse> {
+	private readonly repo;
+	private readonly resMapper = new ListProjectsResponseMapper();
 
-    constructor(repo: ProjectRepository) {
-        super();
-        this.repo = repo;
-    }
+	constructor(repo: ProjectRepository) {
+		super();
+		this.repo = repo;
+	}
 
-    public override async execute(
-        _req: ListProjectsRequest,
-    ): Promise<ListProjectsResponse> {
-        const models = await this.repo.list();
+	public override async execute(
+		_req: ListProjectsRequest,
+	): Promise<ListProjectsResponse> {
+		const models = await this.repo.list();
 
-        return this.resMapper.map(models);
-    }
+		return this.resMapper.map(models);
+	}
 }

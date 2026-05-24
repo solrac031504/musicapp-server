@@ -2,7 +2,7 @@ import { BaseListResponse } from "../../../../common/responses/base-list-respons
 import { ProjectDTO } from "../../../../dto/project.dto.ts";
 
 export class ListProjectsResponse extends BaseListResponse<ProjectDTO> {
-    constructor(dtos: ProjectDTO[]) {
-        super(dtos);
-    }
+	constructor(dtos: ProjectDTO[]) {
+		super(dtos);
+	}
 }

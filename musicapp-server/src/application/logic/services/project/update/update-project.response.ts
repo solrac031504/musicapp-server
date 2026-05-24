@@ -2,7 +2,7 @@ import { BaseItemResponse } from "../../../../common/responses/base-item-respons
 import { ProjectDTO } from "../../../../dto/project.dto.ts";
 
 export class UpdateProjectResponse extends BaseItemResponse<ProjectDTO> {
-    constructor(dto: ProjectDTO | null) {
-        super(dto);
-    }
+	constructor(dto: ProjectDTO | null) {
+		super(dto);
+	}
 }
