@@ -14,10 +14,7 @@ export class LoginUserRepository extends Repository<
 > {
 	private readonly loginUserProcedure;
 
-	constructor(
-		dataSource: DataSource,
-		loginUserProcedure: LoginUserProcedure,
-	) {
+	constructor(dataSource: DataSource, loginUserProcedure: LoginUserProcedure) {
 		super(dataSource, LoginUserEntity, new LoginUserEntityMapper());
 
 		this.loginUserProcedure = loginUserProcedure;

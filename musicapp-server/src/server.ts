@@ -8,6 +8,7 @@ import { ArtistGroupController } from "./api/controllers/artist-group.controller
 import { ArtistController } from "./api/controllers/artist.controller.ts";
 import { GenreHierarchyController } from "./api/controllers/genre-hierarchy.controller.ts";
 import { GenreController } from "./api/controllers/genre.controller.ts";
+import { LoginController } from "./api/controllers/login.controller.ts";
 import { ProducerGroupMembershipController } from "./api/controllers/producer-group-membership.controller.ts";
 import { ProducerGroupController } from "./api/controllers/producer-group.controller.ts";
 import { ProducerController } from "./api/controllers/producer.controller.ts";
@@ -21,6 +22,7 @@ import { artistGroupRoutes } from "./api/routes/artist-group.routes.ts";
 import { artistRoutes } from "./api/routes/artist.routes.ts";
 import { genreHierarchyRoutes } from "./api/routes/genre-hierarchy.routes.ts";
 import { genreRoutes } from "./api/routes/genre.routes.ts";
+import { loginRoutes } from "./api/routes/login.routes.ts";
 import { producerGroupMembershipRoutes } from "./api/routes/producer-group-membership.routes.ts";
 import { producerGroupRoutes } from "./api/routes/producer-group.routes.ts";
 import { producerRoutes } from "./api/routes/producer.routes.ts";
@@ -54,6 +56,7 @@ import { DeleteGenreService } from "./application/logic/services/genre/delete/de
 import { GetGenreService } from "./application/logic/services/genre/get/get-genre.service.ts";
 import { ListGenresService } from "./application/logic/services/genre/list/list-genres.service.ts";
 import { UpdateGenreService } from "./application/logic/services/genre/update/update-genre.service.ts";
+import { LoginUserService } from "./application/logic/services/login-user/login/login-user.service.ts";
 import { AddProducerGroupMembershipService } from "./application/logic/services/producer-group-membership/add/add-producer-group-membership.service.ts";
 import { DeleteProducerGroupMembershipService } from "./application/logic/services/producer-group-membership/delete/delete-producer-group-membership.service.ts";
 import { GetProducerGroupMembershipService } from "./application/logic/services/producer-group-membership/get/get-producer-group-membership.service.ts";
@@ -95,11 +98,13 @@ import { GetStreamingServiceService } from "./application/logic/services/streami
 import { ListStreamingServicesService } from "./application/logic/services/streaming-service/list/list-streaming-services.service.ts";
 import { UpdateStreamingServiceService } from "./application/logic/services/streaming-service/update/update-streaming-service.service.ts";
 import { dataSource } from "./infrastructure/data-access/databases/database.ts";
+import { LoginUserProcedure } from "./infrastructure/data-access/procedures/login-user.procedure.ts";
 import { ArtistGroupMembershipRepository } from "./infrastructure/data-access/repositories/artist-group-membership.repository.ts";
 import { ArtistGroupRepository } from "./infrastructure/data-access/repositories/artist-group.repository.ts";
 import { ArtistRepository } from "./infrastructure/data-access/repositories/artist.repository.ts";
 import { GenreHierarchyRepository } from "./infrastructure/data-access/repositories/genre-hierarchy.repository.ts";
 import { GenreRepository } from "./infrastructure/data-access/repositories/genre.repository.ts";
+import { LoginUserRepository } from "./infrastructure/data-access/repositories/login-user.repository.ts";
 import { ProducerGroupMembershipRepository } from "./infrastructure/data-access/repositories/producer-group-membership.repository.ts";
 import { ProducerGroupRepository } from "./infrastructure/data-access/repositories/producer-group.repository.ts";
 import { ProducerRepository } from "./infrastructure/data-access/repositories/producer.repository.ts";
@@ -137,6 +142,7 @@ dataSource.initialize()
 		const artistGroupMembershipRepository = new ArtistGroupMembershipRepository(dataSource);
 		const genreRepository = new GenreRepository(dataSource);
 		const genreHierarchyRepository = new GenreHierarchyRepository(dataSource);
+		const loginUserRepository = new LoginUserRepository(dataSource, new LoginUserProcedure(dataSource));
 		const producerRepository = new ProducerRepository(dataSource);
 		const producerGroupRepository = new ProducerGroupRepository(dataSource);
 		const producerGroupMembershipRepository = new ProducerGroupMembershipRepository(dataSource);
@@ -170,6 +176,8 @@ dataSource.initialize()
 		const getGenreService = new GetGenreService(genreRepository);
 		const listGenresService = new ListGenresService(genreRepository);
 		const updateGenreService = new UpdateGenreService(genreRepository);
+
+		const loginUserService = new LoginUserService(loginUserRepository);
 
 		const addProducerService = new AddProducerService(producerRepository);
 		const deleteProducerService = new DeleteProducerService(producerRepository);
@@ -266,6 +274,8 @@ dataSource.initialize()
 			updateGenreHierarchyService,
 		);
 
+		const loginController = new LoginController(loginUserService);
+
 		const producerController = new ProducerController(
 			addProducerService,
 			deleteProducerService,
@@ -334,11 +344,12 @@ dataSource.initialize()
 		app.route("/artists", artistRoutes(artistController));
 		app.route("/artist-groups", artistGroupRoutes(artistGroupController));
 		app.route("/artist-group-memberships", artistGroupMembershipRoutes(artistGroupMembershipController));
+		app.route("/genres", genreRoutes(genreController));
+		app.route("/genre-hierarchies", genreHierarchyRoutes(genreHierarchyController));
+		app.route("/login", loginRoutes(loginController));
 		app.route("/producers", producerRoutes(producerController));
 		app.route("/producer-groups", producerGroupRoutes(producerGroupController));
 		app.route("/producer-group-memberships", producerGroupMembershipRoutes(producerGroupMembershipController));
-		app.route("/genres", genreRoutes(genreController));
-		app.route("/genre-hierarchies", genreHierarchyRoutes(genreHierarchyController));
 		app.route("/project-types", projectTypeRoutes(projectTypeController));
 		app.route("/projects", projectRoutes(projectController));
 		app.route("/scenes", sceneRoutes(sceneController));
