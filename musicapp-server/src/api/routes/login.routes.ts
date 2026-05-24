@@ -6,7 +6,7 @@ export function loginRoutes(controller: LoginController): Hono {
 	const router = new Hono();
 
 	// Post /login - login user
-	router.post("/login", async (c) => {
+	router.post("/", async (c) => {
 		const body = await c.req.json<LoginUserRequest>();
 
 		const res = await controller.loginUser(body);
