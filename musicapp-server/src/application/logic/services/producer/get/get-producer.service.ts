@@ -1,11 +1,12 @@
 import { ProducerRepository } from "../../../../../infrastructure/data-access/repositories/producer.repository.ts";
 import { BaseService } from "../../../../common/services/base-service.ts";
-import { ProducerDTO } from "../../../../dto/producer.dto.ts";
+import { GetProducerResponseMapper } from "../../../mappers/response-mappers/get-producer.response-mapper.ts";
 import { GetProducerRequest } from "./get-producer.request.ts";
 import { GetProducerResponse } from "./get-producer.response.ts";
 
 export class GetProducerService extends BaseService<GetProducerRequest, GetProducerResponse> {
 	private readonly repo;
+	private readonly resMapper = new GetProducerResponseMapper();
 
 	constructor(repo: ProducerRepository) {
 		super();
@@ -19,6 +20,6 @@ export class GetProducerService extends BaseService<GetProducerRequest, GetProdu
 
 		if (!model) return new GetProducerResponse().notFound();
 
-		return new GetProducerResponse(new ProducerDTO(model));
+		return this.resMapper.map(model);
 	}
 }

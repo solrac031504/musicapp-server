@@ -11,9 +11,7 @@ export class DeleteProducerService extends BaseService<DeleteProducerRequest, De
 		this.repo = repo;
 	}
 
-	public override async execute(
-		req: DeleteProducerRequest,
-	): Promise<DeleteProducerResponse> {
+	public override async execute(req: DeleteProducerRequest): Promise<DeleteProducerResponse> {
 		await this.repo.delete(req.id);
 
 		return new DeleteProducerResponse();
