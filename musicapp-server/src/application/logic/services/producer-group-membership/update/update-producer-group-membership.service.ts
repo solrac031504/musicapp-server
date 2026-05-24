@@ -1,31 +1,25 @@
-import { ProducerGroupMembershipModel } from "../../../../../domain/models/producer-group-membership.model.ts";
 import { ProducerGroupMembershipRepository } from "../../../../../infrastructure/data-access/repositories/producer-group-membership.repository.ts";
 import { BaseService } from "../../../../common/services/base-service.ts";
-import { ProducerGroupMembershipDTO } from "../../../../dto/producer-group-membership.dto.ts";
+import { UpdateProducerGroupMembershipRequestMapper } from "../../../mappers/request-mappers/update-producer-group-membership.request-mapper.ts";
+import { UpdateProducerGroupMembershipResponseMapper } from "../../../mappers/response-mappers/update-producer-group-membership.response-mapper.ts";
 import { UpdateProducerGroupMembershipRequest } from "./update-producer-group-membership.request.ts";
 import { UpdateProducerGroupMembershipResponse } from "./update-producer-group-membership.response.ts";
 
 export class UpdateProducerGroupMembershipService extends BaseService<UpdateProducerGroupMembershipRequest, UpdateProducerGroupMembershipResponse> {
 	private readonly repo;
+	private readonly reqMapper = new UpdateProducerGroupMembershipRequestMapper();
+	private readonly resMapper = new UpdateProducerGroupMembershipResponseMapper();
 
 	constructor(repo: ProducerGroupMembershipRepository) {
 		super();
 		this.repo = repo;
 	}
 
-	public override async execute(
-		req: UpdateProducerGroupMembershipRequest,
-	): Promise<UpdateProducerGroupMembershipResponse> {
-		const model = {
-			id: req.item.id,
-			producerGroupId: req.item.producerGroupId,
-			producerId: req.item.producerId,
-			createdBy: req.item.createdBy,
-			modifiedBy: req.item.modifiedBy,
-		} as ProducerGroupMembershipModel;
+	public override async execute(req: UpdateProducerGroupMembershipRequest): Promise<UpdateProducerGroupMembershipResponse> {
+		const model = this.reqMapper.map(req);
 
 		const updatedModel = await this.repo.update(model);
 
-		return new UpdateProducerGroupMembershipResponse(new ProducerGroupMembershipDTO(updatedModel));
+		return this.resMapper.map(updatedModel);
 	}
 }
