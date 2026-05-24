@@ -1,103 +1,100 @@
-import dotenv from 'dotenv';
-import express, { Express, Request, Response, NextFunction } from 'express';
-import cors from 'cors';
-import path from 'path';
-import { Database } from './database';
-import { EnvVariables } from './types';
+// #region Imports
+import { Hono } from "hono";
+import { logger } from "hono/logger";
+import "reflect-metadata";
+import { buildCorsMiddleware } from "./api/middleware/cors.middleware.ts";
+import { artistGroupMembershipRoutes } from "./api/routes/artist-group-membership.routes.ts";
+import { artistGroupRoutes } from "./api/routes/artist-group.routes.ts";
+import { artistRoutes } from "./api/routes/artist.routes.ts";
+import { genreHierarchyRoutes } from "./api/routes/genre-hierarchy.routes.ts";
+import { genreRoutes } from "./api/routes/genre.routes.ts";
+import { loginRoutes } from "./api/routes/login.routes.ts";
+import { producerGroupMembershipRoutes } from "./api/routes/producer-group-membership.routes.ts";
+import { producerGroupRoutes } from "./api/routes/producer-group.routes.ts";
+import { producerRoutes } from "./api/routes/producer.routes.ts";
+import { projectTypeRoutes } from "./api/routes/project-type.routes.ts";
+import { projectRoutes } from "./api/routes/project.routes.ts";
+import { sceneRoutes } from "./api/routes/scene.routes.ts";
+import { songRoutes } from "./api/routes/song.routes.ts";
+import { streamingServiceRoutes } from "./api/routes/streaming-service.routes.ts";
+import {
+	bootstrapArtist,
+	bootstrapArtistGroup,
+	bootstrapArtistGroupMembership,
+	bootstrapGenre,
+	bootstrapGenreHierarchy,
+	bootstrapLogin,
+	bootstrapProducer,
+	bootstrapProducerGroup,
+	bootstrapProducerGroupMembership,
+	bootstrapProject,
+	bootstrapProjectType,
+	bootstrapScene,
+	bootstrapSong,
+	bootstrapStreamingService,
+} from "./infrastructure/bootstrap/index.ts";
+import { dataSource } from "./infrastructure/data-access/databases/database.ts";
+// #endregion
 
-// Load environment variables
-const envPath = path.join(__dirname, '..', '..', '.env');
+const app = new Hono();
 
-// Set environment variables
-const env: Partial<EnvVariables> = {
-    PORT: parseInt(process.env.PORT || '5000'),
-    NODE_ENV: process.env.NODE_ENV as 'develop' | 'production' | 'test' || 'develop',
-    FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:3000'
-};
+// Setup logger of development
+app.use(logger());
 
-const app: Express = express();
-const PORT = env.PORT || 5000;
+// CORS config for now
+app.use("*", buildCorsMiddleware());
 
-// CORS config
-app.use(cors({
-    origin: env.NODE_ENV === 'production'
-        ? env.FRONTEND_URL
-        : 'http://localhost:3000',
-    credentials: true
-}));
+// Health check
+app.get(
+	"/",
+	(c) => c.json({ status: "ok", message: "musicapp-server running" }),
+);
 
-// Middleware
-app.use(express.json());
+// --- Database + Server bootstrap ---
+const PORT = parseInt(Deno.env.get("PORT") ?? "3000");
 
-// Request logging middleware
-app.use((req: Request, res: Response, next: NextFunction) => {
-    console.log(`${req.method} ${req.path} - ${new Date().toISOString()}`);
-    next();
-});
+dataSource.initialize()
+	.then(() => {
+		console.log("Database connected");
 
-// DB middleware
-app.use((req: Request, res: Response, next: NextFunction) => {
-    req.db = Database.getInstance();
-    next();
-});
+		// Wire up all domains
+		const controllers = {
+			artist: bootstrapArtist(dataSource),
+			artistGroup: bootstrapArtistGroup(dataSource),
+			artistGroupMembership: bootstrapArtistGroupMembership(dataSource),
+			genre: bootstrapGenre(dataSource),
+			genreHierarchy: bootstrapGenreHierarchy(dataSource),
+			login: bootstrapLogin(dataSource),
+			producer: bootstrapProducer(dataSource),
+			producerGroup: bootstrapProducerGroup(dataSource),
+			producerGroupMembership: bootstrapProducerGroupMembership(dataSource),
+			project: bootstrapProject(dataSource),
+			projectType: bootstrapProjectType(dataSource),
+			scene: bootstrapScene(dataSource),
+			song: bootstrapSong(dataSource),
+			streamingService: bootstrapStreamingService(dataSource),
+		};
 
-// Extend express request type
-declare global {
-    namespace Express {
-        interface Request {
-            db: Database;
-        }
-    }
-}
+		// Register routes
+		app.route("/artists", artistRoutes(controllers.artist));
+		app.route("/artist-groups", artistGroupRoutes(controllers.artistGroup));
+		app.route("/artist-group-memberships", artistGroupMembershipRoutes(controllers.artistGroupMembership));
+		app.route("/genres", genreRoutes(controllers.genre));
+		app.route("/genre-hierarchies", genreHierarchyRoutes(controllers.genreHierarchy));
+		app.route("/login", loginRoutes(controllers.login));
+		app.route("/producers", producerRoutes(controllers.producer));
+		app.route("/producer-groups", producerGroupRoutes(controllers.producerGroup));
+		app.route("/producer-group-memberships", producerGroupMembershipRoutes(controllers.producerGroupMembership));
+		app.route("/projects", projectRoutes(controllers.project));
+		app.route("/project-types", projectTypeRoutes(controllers.projectType));
+		app.route("/scenes", sceneRoutes(controllers.scene));
+		app.route("/songs", songRoutes(controllers.song));
+		app.route("/streaming-services", streamingServiceRoutes(controllers.streamingService));
 
-/* ********************************* IMPLEMENT HEALTH CHECK LATER DONT FEEL LIKE IT NOW ********************************* */
-
-import listRoutes from './routes/list';
-import loginRoutes from './routes/login';
-
-app.use('/api/list', listRoutes);
-app.use('/api/user', loginRoutes);
-
-// 404 handler
-app.use((req: Request, res: Response) => {
-    res.status(404).json({
-        error: 'Route not found',
-        path: req.originalUrl
-    });
-});
-
-// Error handling middleware
-interface AppError extends Error {
-    status?: number;
-}
-
-app.use((err: AppError, req: Request, res: Response, next: NextFunction) => {
-    console.error('Server error: ', err.stack);
-    res.status(err.status || 500).json({
-        error: env.NODE_ENV === 'production'
-            ? 'Internal server error'
-            : err.message,
-        ...(env.NODE_ENV !== 'production' && { stack: err.stack })
-    });
-});
-
-// Start server
-async function startServer(): Promise<void> {
-    try {
-        // Initialize DB connection
-        const db = Database.getInstance();
-        await db.connect();
-
-        app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}`);
-            console.log(`Environment: ${env.NODE_ENV || 'No environment specified'}`);
-        });
-    } catch (err) {
-        console.log('Failed to start server due to database connection error:', err);
-        process.exit(1);
-    }
-}
-
-startServer();
-
-export default app;
+		Deno.serve({ port: PORT }, app.fetch);
+		console.log(`Server listening on port ${PORT}`);
+	})
+	.catch((err) => {
+		console.error("Database connection failed:", err);
+		Deno.exit(1);
+	});

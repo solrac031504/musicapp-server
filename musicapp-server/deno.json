@@ -1,0 +1,25 @@
+{
+  "tasks": {
+    "dev": "deno run --watch --allow-net --allow-env --env-file --allow-read src/server.ts",
+    "start": "deno run --allow-net --allow-env --env-file --allow-read src/server.ts"
+  },
+  "compilerOptions": {
+    "lib": ["ES2020", "deno.ns", "deno.window"],
+    "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "imports": {
+    "hono": "jsr:@hono/hono@^4.7.11",
+    "hono/cors": "jsr:@hono/hono@^4.7.11/cors",
+    "hono/logger": "jsr:@hono/hono@^4.7.11/logger",
+    "typeorm": "npm:typeorm@^0.3.28",
+    "reflect-metadata": "npm:reflect-metadata@^0.2.2",
+    "pg": "npm:pg@^8.20.0"
+  },
+  "fmt": {
+    "indentWidth": 4,
+    "useTabs": true,
+    "lineWidth": 160
+  }
+}

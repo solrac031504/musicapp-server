@@ -3,46 +3,29 @@ name: MusicApp-Server CI
 on:
   pull_request:
     branches:
-        - master
+      - master
     types:
-        - opened
-        - synchronize
-        - reopened
+      - opened
+      - synchronize
+      - reopened
   push:
     branches:
-        - '*'
+      - '*'
 
 jobs:
   musicapp-server-validation:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
-                
-      - name: Use Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: '25.x'
+        uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: cd musicapp-server && npm install
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Cache Deno dependencies
+        run: cd musicapp-server && deno install
 
       - name: Type check
-        run: cd musicapp-server && npm run type-check
-
-  frontend-validation:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-                
-      - name: Use Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: '25.x'
-
-      - name: Install dependencies
-        run: cd frontend && npm install
-
-      - name: Type check
-        run: cd frontend && npm run type-check
+        run: cd musicapp-server && deno check src
