@@ -10,6 +10,7 @@ import { GenreController } from "./api/controllers/genre.controller.ts";
 import { ProducerGroupMembershipController } from "./api/controllers/producer-group-membership.controller.ts";
 import { ProducerGroupController } from "./api/controllers/producer-group.controller.ts";
 import { ProducerController } from "./api/controllers/producer.controller.ts";
+import { ProjectTypeController } from "./api/controllers/project-type.controller.ts";
 import { artistGroupMembershipRoutes } from "./api/routes/artist-group-membership.routes.ts";
 import { artistGroupRoutes } from "./api/routes/artist-group.routes.ts";
 import { artistRoutes } from "./api/routes/artist.routes.ts";
@@ -18,6 +19,7 @@ import { genreRoutes } from "./api/routes/genre.routes.ts";
 import { producerGroupMembershipRoutes } from "./api/routes/producer-group-membership.routes.ts";
 import { producerGroupRoutes } from "./api/routes/producer-group.routes.ts";
 import { producerRoutes } from "./api/routes/producer.routes.ts";
+import { projectTypeRoutes } from "./api/routes/project-type.routes.ts";
 import { AddArtistGroupMembershipService } from "./application/logic/services/artist-group-membership/add/add-artist-group-membership.service.ts";
 import { DeleteArtistGroupMembershipService } from "./application/logic/services/artist-group-membership/delete/delete-artist-group-membership.service.ts";
 import { GetArtistGroupMembershipService } from "./application/logic/services/artist-group-membership/get/get-artist-group-membership.service.ts";
@@ -58,6 +60,11 @@ import { DeleteProducerService } from "./application/logic/services/producer/del
 import { GetProducerService } from "./application/logic/services/producer/get/get-producer.service.ts";
 import { ListProducersService } from "./application/logic/services/producer/list/list-producers.service.ts";
 import { UpdateProducerService } from "./application/logic/services/producer/update/update-producer.service.ts";
+import { AddProjectTypeService } from "./application/logic/services/project-type/add/add-project-type.service.ts";
+import { DeleteProjectTypeService } from "./application/logic/services/project-type/delete/delete-project-type.service.ts";
+import { GetProjectTypeService } from "./application/logic/services/project-type/get/get-project-type.service.ts";
+import { ListProjectTypesService } from "./application/logic/services/project-type/list/list-project-types.service.ts";
+import { UpdateProjectTypeService } from "./application/logic/services/project-type/update/update-project-type.service.ts";
 import { dataSource } from "./infrastructure/data-access/databases/database.ts";
 import { ArtistGroupMembershipRepository } from "./infrastructure/data-access/repositories/artist-group-membership.repository.ts";
 import { ArtistGroupRepository } from "./infrastructure/data-access/repositories/artist-group.repository.ts";
@@ -67,6 +74,7 @@ import { GenreRepository } from "./infrastructure/data-access/repositories/genre
 import { ProducerGroupMembershipRepository } from "./infrastructure/data-access/repositories/producer-group-membership.repository.ts";
 import { ProducerGroupRepository } from "./infrastructure/data-access/repositories/producer-group.repository.ts";
 import { ProducerRepository } from "./infrastructure/data-access/repositories/producer.repository.ts";
+import { ProjectTypeRepository } from "./infrastructure/data-access/repositories/project-type.repository.ts";
 
 const app = new Hono();
 
@@ -98,6 +106,7 @@ dataSource.initialize()
 		const producerRepository = new ProducerRepository(dataSource);
 		const producerGroupRepository = new ProducerGroupRepository(dataSource);
 		const producerGroupMembershipRepository = new ProducerGroupMembershipRepository(dataSource);
+		const projectTypeRepository = new ProjectTypeRepository(dataSource);
 
 		// Add services
 		const addArtistService = new AddArtistService(artistRepository);
@@ -147,6 +156,12 @@ dataSource.initialize()
 		const getGenreHierarchyService = new GetGenreHierarchyService(genreHierarchyRepository);
 		const listGenreHierarchiesService = new ListGenreHierarchiesService(genreHierarchyRepository);
 		const updateGenreHierarchyService = new UpdateGenreHierarchyService(genreHierarchyRepository);
+
+		const addProjectTypeService = new AddProjectTypeService(projectTypeRepository);
+		const deleteProjectTypeService = new DeleteProjectTypeService(projectTypeRepository);
+		const getProjectTypeService = new GetProjectTypeService(projectTypeRepository);
+		const listProjectTypesService = new ListProjectTypesService(projectTypeRepository);
+		const updateProjectTypeService = new UpdateProjectTypeService(projectTypeRepository);
 
 		// Add controllers
 		const artistController = new ArtistController(
@@ -213,6 +228,14 @@ dataSource.initialize()
 			updateProducerGroupMembershipService,
 		);
 
+		const projectTypeController = new ProjectTypeController(
+			addProjectTypeService,
+			deleteProjectTypeService,
+			getProjectTypeService,
+			listProjectTypesService,
+			updateProjectTypeService,
+		);
+
 		// Routing
 		app.route("/artists", artistRoutes(artistController));
 		app.route("/artist-groups", artistGroupRoutes(artistGroupController));
@@ -222,6 +245,7 @@ dataSource.initialize()
 		app.route("/producer-group-memberships", producerGroupMembershipRoutes(producerGroupMembershipController));
 		app.route("/genres", genreRoutes(genreController));
 		app.route("/genre-hierarchies", genreHierarchyRoutes(genreHierarchyController));
+		app.route("/project-types", projectTypeRoutes(projectTypeController));
 
 		Deno.serve({ port: PORT }, app.fetch);
 		console.log(`Server listening on port ${PORT}`);
