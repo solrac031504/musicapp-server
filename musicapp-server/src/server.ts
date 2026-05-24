@@ -1,8 +1,8 @@
 // #region Imports
 import { Hono } from "hono";
-import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import "reflect-metadata";
+import { buildCorsMiddleware } from "./api/middleware/cors.middleware.ts";
 import { artistGroupMembershipRoutes } from "./api/routes/artist-group-membership.routes.ts";
 import { artistGroupRoutes } from "./api/routes/artist-group.routes.ts";
 import { artistRoutes } from "./api/routes/artist.routes.ts";
@@ -42,7 +42,7 @@ const app = new Hono();
 app.use(logger());
 
 // CORS config for now
-app.use("*", cors());
+app.use("*", buildCorsMiddleware());
 
 // Health check
 app.get(
