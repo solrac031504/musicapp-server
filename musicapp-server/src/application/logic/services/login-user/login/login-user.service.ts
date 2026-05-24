@@ -40,7 +40,7 @@ export class LoginUserService extends BaseService<LoginUserRequest, LoginUserRes
 		} = req.item;
 
 		// Get salt from env
-		const salt = process.env.SALT || "";
+		const salt = Deno.env.get("SALT") || "";
 
 		const hashPassword = await this.computeSHA256Hash(password, salt);
 
