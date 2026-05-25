@@ -15,6 +15,10 @@ on:
 jobs:
   musicapp-server-validation:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: musicapp-server
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -24,8 +28,11 @@ jobs:
         with:
           deno-version: v2.x
 
-      - name: Cache Deno dependencies
-        run: cd musicapp-server && deno install
+      - name: Install dependencies
+        run: deno install
+
+      - name: Show outdated packages
+        run: deno outdated
 
       - name: Type check
-        run: cd musicapp-server && deno check src
+        run: deno check src
