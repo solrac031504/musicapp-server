@@ -9,25 +9,7 @@
       "deno.ns",
       "deno.window"
     ],
-    "strict": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@infrastructure/*": [
-        "src/infrastructure/*"
-      ],
-      "@domain/*": [
-        "src/domain/*"
-      ],
-      "@application/*": [
-        "src/application/*"
-      ],
-      "@api/*": [
-        "src/api/*"
-      ]
-    }
+    "strict": true
   },
   "imports": {
     "hono": "jsr:@hono/hono@^4.12.23",
@@ -35,7 +17,12 @@
     "hono/logger": "jsr:@hono/hono@^4.12.23/logger",
     "typeorm": "npm:typeorm@^1.0.0",
     "reflect-metadata": "npm:reflect-metadata@^0.2.2",
-    "pg": "npm:pg@^8.21.0"
+    "pg": "npm:pg@^8.21.0",
+    "@/": "./",
+    "@infrastructure/": "./src/infrastructure/",
+    "@domain/": "./src/domain/",
+    "@application/": "./src/application/",
+    "@api/": "./src/api/"
   },
   "fmt": {
     "indentWidth": 4,
