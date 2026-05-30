@@ -4,10 +4,30 @@
     "start": "deno run --allow-net --allow-env --env-file --allow-read src/server.ts"
   },
   "compilerOptions": {
-    "lib": ["ES2020", "deno.ns", "deno.window"],
+    "lib": [
+      "ES2020",
+      "deno.ns",
+      "deno.window"
+    ],
     "strict": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@infrastructure/*": [
+        "src/infrastructure/*"
+      ],
+      "@domain/*": [
+        "src/domain/*"
+      ],
+      "@application/*": [
+        "src/application/*"
+      ],
+      "@api/*": [
+        "src/api/*"
+      ]
+    }
   },
   "imports": {
     "hono": "jsr:@hono/hono@^4.12.23",
