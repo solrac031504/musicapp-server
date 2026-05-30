@@ -13,11 +13,15 @@ export class GenreHierarchyViewRepository extends Repository<GenreHierarchyViewM
 		throw new Error("Method not implemented.");
 	}
 
-	public async listByGenreId(id: number): Promise<GenreHierarchyViewEntity[]> {
-		return await this.repo.findBy({ genreId: id });
+	public async listByGenreId(id: number): Promise<GenreHierarchyViewModel[]> {
+		const entities = await this.repo.findBy({ genreId: id });
+
+		return entities.map((e) => this.toModel(e));
 	}
 
-	public async listByParentGenreId(id: number): Promise<GenreHierarchyViewEntity[]> {
-		return await this.repo.findBy({ parentGenreId: id });
+	public async listByParentGenreId(id: number): Promise<GenreHierarchyViewModel[]> {
+		const entities = await this.repo.findBy({ parentGenreId: id });
+
+		return entities.map((e) => this.toModel(e));
 	}
 }
