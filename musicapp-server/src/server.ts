@@ -1,22 +1,19 @@
 // #region Imports
-import { Hono } from "hono";
-import { logger } from "hono/logger";
-import "reflect-metadata";
-import { buildCorsMiddleware } from "./api/middleware/cors.middleware.ts";
-import { artistGroupMembershipRoutes } from "./api/routes/artist-group-membership.routes.ts";
-import { artistGroupRoutes } from "./api/routes/artist-group.routes.ts";
-import { artistRoutes } from "./api/routes/artist.routes.ts";
-import { genreHierarchyRoutes } from "./api/routes/genre-hierarchy.routes.ts";
-import { genreRoutes } from "./api/routes/genre.routes.ts";
-import { loginRoutes } from "./api/routes/login.routes.ts";
-import { producerGroupMembershipRoutes } from "./api/routes/producer-group-membership.routes.ts";
-import { producerGroupRoutes } from "./api/routes/producer-group.routes.ts";
-import { producerRoutes } from "./api/routes/producer.routes.ts";
-import { projectTypeRoutes } from "./api/routes/project-type.routes.ts";
-import { projectRoutes } from "./api/routes/project.routes.ts";
-import { sceneRoutes } from "./api/routes/scene.routes.ts";
-import { songRoutes } from "./api/routes/song.routes.ts";
-import { streamingServiceRoutes } from "./api/routes/streaming-service.routes.ts";
+import { buildCorsMiddleware } from "@api/middleware/cors.middleware.ts";
+import { artistGroupMembershipRoutes } from "@api/routes/artist-group-membership.routes.ts";
+import { artistGroupRoutes } from "@api/routes/artist-group.routes.ts";
+import { artistRoutes } from "@api/routes/artist.routes.ts";
+import { genreHierarchyRoutes } from "@api/routes/genre-hierarchy.routes.ts";
+import { genreRoutes } from "@api/routes/genre.routes.ts";
+import { loginRoutes } from "@api/routes/login.routes.ts";
+import { producerGroupMembershipRoutes } from "@api/routes/producer-group-membership.routes.ts";
+import { producerGroupRoutes } from "@api/routes/producer-group.routes.ts";
+import { producerRoutes } from "@api/routes/producer.routes.ts";
+import { projectTypeRoutes } from "@api/routes/project-type.routes.ts";
+import { projectRoutes } from "@api/routes/project.routes.ts";
+import { sceneRoutes } from "@api/routes/scene.routes.ts";
+import { songRoutes } from "@api/routes/song.routes.ts";
+import { streamingServiceRoutes } from "@api/routes/streaming-service.routes.ts";
 import {
 	bootstrapArtist,
 	bootstrapArtistGroup,
@@ -32,8 +29,11 @@ import {
 	bootstrapScene,
 	bootstrapSong,
 	bootstrapStreamingService,
-} from "./infrastructure/bootstrap/index.ts";
-import { dataSource } from "./infrastructure/data-access/databases/database.ts";
+} from "@infrastructure/bootstrap/index.ts";
+import { dataSource } from "@infrastructure/data-access/databases/database.ts";
+import { Hono } from "hono";
+import { logger } from "hono/logger";
+import "reflect-metadata";
 // #endregion
 
 const app = new Hono();
