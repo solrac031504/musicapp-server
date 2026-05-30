@@ -9,7 +9,8 @@
       "deno.ns",
       "deno.window"
     ],
-    "strict": true
+    "strict": true,
+    "experimentalDecorators": true
   },
   "imports": {
     "hono": "jsr:@hono/hono@^4.12.23",
