@@ -1,14 +1,12 @@
+import { GenreHierarchyController } from "@api/controllers/genre-hierarchy.controller.ts";
+import { AddGenreHierarchyRequest } from "@application/logic/services/genre-hierarchy/add/add-genre-hierarchy.request.ts";
+import { DeleteGenreHierarchyRequest } from "@application/logic/services/genre-hierarchy/delete/delete-genre-hierarchy.request.ts";
+import { ListGenreHierarchyByGenreRequest } from "@application/logic/services/genre-hierarchy/list/by-genre/list-genre-hierarchy-by-genre.request.ts";
+import { ListGenreHierarchyByParentGenreRequest } from "@application/logic/services/genre-hierarchy/list/by-parent-genre/list-genre-hierarchy-by-parent-genre.request.ts";
+import { UpdateGenreHierarchyRequest } from "@application/logic/services/genre-hierarchy/update/update-genre-hierarchy.request.ts";
 import { Hono } from "hono";
-import { AddGenreHierarchyRequest } from "../../application/logic/services/genre-hierarchy/add/add-genre-hierarchy.request.ts";
-import { DeleteGenreHierarchyRequest } from "../../application/logic/services/genre-hierarchy/delete/delete-genre-hierarchy.request.ts";
-import { GetGenreHierarchyRequest } from "../../application/logic/services/genre-hierarchy/get/get-genre-hierarchy.request.ts";
-import { ListGenreHierarchiesRequest } from "../../application/logic/services/genre-hierarchy/list/list-genre-hierarchies.request.ts";
-import { UpdateGenreHierarchyRequest } from "../../application/logic/services/genre-hierarchy/update/update-genre-hierarchy.request.ts";
-import { GenreHierarchyController } from "../controllers/genre-hierarchy.controller.ts";
 
-export function genreHierarchyRoutes(
-	controller: GenreHierarchyController,
-): Hono {
+export function genreHierarchyRoutes(controller: GenreHierarchyController): Hono {
 	const router = new Hono();
 
 	// POST /genre-hierarchies — create a new genre hierarchy record
@@ -18,24 +16,6 @@ export function genreHierarchyRoutes(
 		const res = await controller.addGenreHierarchy(body);
 
 		return c.json(res, 201);
-	});
-
-	// GET /genre-hierarchies — list all genre hierarchy records
-	router.get("/", async (c) => {
-		const res = await controller.listGenreHierarchies(
-			new ListGenreHierarchiesRequest(),
-		);
-
-		return c.json(res);
-	});
-
-	// GET /genre-hierarchies/:id — get a single genre hierarchy record
-	router.get("/:id", async (c) => {
-		const req = { id: parseInt(c.req.param("id")) } as GetGenreHierarchyRequest;
-
-		const res = await controller.getGenreHierarchy(req);
-
-		return c.json(res, res.statusCode as 200 | 404);
 	});
 
 	// PATCH /genre-hierarchies/:id — update a genre hierarchy record
@@ -56,6 +36,24 @@ export function genreHierarchyRoutes(
 		const res = await controller.deleteGenreHierarchy(req);
 
 		return c.json(res, 200);
+	});
+
+	//GET /genre-hierarchies?genreId OR ?parentGenreId - list genre hierarchies by the genreId
+	router.get("/", async (c) => {
+		const genreId = c.req.query("genreId");
+		const parentGenreId = c.req.query("parentGenreId");
+
+		if (genreId) {
+			const res = await controller.listGenreHierarchiesByGenre({ id: parseInt(genreId) } as ListGenreHierarchyByGenreRequest);
+
+			return c.json(res, res.statusCode as 200 | 404);
+		} else if (parentGenreId) {
+			const res = await controller.listGenreHierarchiesByParentGenre({ id: parseInt(parentGenreId) } as ListGenreHierarchyByParentGenreRequest);
+
+			return c.json(res, res.statusCode as 200 | 404);
+		} else {
+			return c.status(404);
+		}
 	});
 
 	return router;

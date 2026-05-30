@@ -1,17 +1,18 @@
+import { ArtistGroupMembershipEntity } from "@infrastructure/data-access/entities/artist-group-membership.entity.ts";
+import { ArtistGroupEntity } from "@infrastructure/data-access/entities/artist-group.entity.ts";
+import { ArtistEntity } from "@infrastructure/data-access/entities/artist.entity.ts";
+import { GenreHierarchyViewEntity } from "@infrastructure/data-access/entities/genre-hierarchy-view.entity.ts";
+import { GenreHierarchyEntity } from "@infrastructure/data-access/entities/genre-hierarchy.entity.ts";
+import { GenreEntity } from "@infrastructure/data-access/entities/genre.entity.ts";
+import { ProducerGroupMembershipEntity } from "@infrastructure/data-access/entities/producer-group-membership.entity.ts";
+import { ProducerGroupEntity } from "@infrastructure/data-access/entities/producer-group.entity.ts";
+import { ProducerEntity } from "@infrastructure/data-access/entities/producer.entity.ts";
+import { ProjectTypeEntity } from "@infrastructure/data-access/entities/project-type.entity.ts";
+import { ProjectEntity } from "@infrastructure/data-access/entities/project.entity.ts";
+import { SceneEntity } from "@infrastructure/data-access/entities/scene.entity.ts";
+import { SongEntity } from "@infrastructure/data-access/entities/song.entity.ts";
+import { StreamingServiceEntity } from "@infrastructure/data-access/entities/streaming-service.entity.ts";
 import { DataSource } from "typeorm";
-import { ArtistGroupMembershipEntity } from "../entities/artist-group-membership.entity.ts";
-import { ArtistGroupEntity } from "../entities/artist-group.entity.ts";
-import { ArtistEntity } from "../entities/artist.entity.ts";
-import { GenreHierarchyEntity } from "../entities/genre-hierarchy.entity.ts";
-import { GenreEntity } from "../entities/genre.entity.ts";
-import { ProducerGroupMembershipEntity } from "../entities/producer-group-membership.entity.ts";
-import { ProducerGroupEntity } from "../entities/producer-group.entity.ts";
-import { ProducerEntity } from "../entities/producer.entity.ts";
-import { ProjectTypeEntity } from "../entities/project-type.entity.ts";
-import { ProjectEntity } from "../entities/project.entity.ts";
-import { SceneEntity } from "../entities/scene.entity.ts";
-import { SongEntity } from "../entities/song.entity.ts";
-import { StreamingServiceEntity } from "../entities/streaming-service.entity.ts";
 
 export const dataSource = new DataSource({
 	type: "postgres",
@@ -28,6 +29,7 @@ export const dataSource = new DataSource({
 		ArtistGroupMembershipEntity,
 		GenreEntity,
 		GenreHierarchyEntity,
+		GenreHierarchyViewEntity,
 		ProducerEntity,
 		ProducerGroupEntity,
 		ProducerGroupMembershipEntity,
